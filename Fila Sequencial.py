@@ -5,7 +5,7 @@ class Fila:
         self.fila = [None] * maximo # Fila iniciada com tamanho definido
         self.inicio = 0 # Define o elemento que deverá sair primeiro da fila
         self._quantidade = 0 # Atributo privado que diz o nº de elementos na fila
-        self.final = 0 # Define o espaço que um elemento qualquer vai preencher ao entrar na fila
+        self.final = 0 # Define o último elemento da fila
 
     @property
     def max(self):
