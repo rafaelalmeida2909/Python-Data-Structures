@@ -4,7 +4,7 @@ class No:
         self.data = data # Valor do nó
         self.prox = None # Próximo nó
 
-class LinkedList:
+class ListaEncadeada:
     """Representação de uma lista encadeada em python, onde cada elemento, é uma instância da classe nó"""
     def __init__(self):
         self.primeiro = None # Primeiro elemento da lista encadeada
