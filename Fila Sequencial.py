@@ -23,7 +23,7 @@ class Fila:
     def enfileirar(self, elem):
         """Adiciona um elemento ao fim da fila"""
         if self._quantidade == self.max: # Verifica se a fila está cheia
-            return "Fila Cheia!"
+            raise Exception("Fila Cheia!")
         self.fila[self.final] = elem
         self.final = (self.final + 1) % self.max # Garante uma fila circular 
         self._quantidade += 1
@@ -31,7 +31,7 @@ class Fila:
     def desenfileirar(self):
         """Retira o primeiro elemento da fila"""
         if self._quantidade == 0: # Verifica se a fila está vazia
-            return "Fila Vazia!"
+            raise Exception("Fila Vazia!")
         self.fila[self.inicio] = None
         self.inicio = (self.inicio + 1) % self.max # Garante uma fila circular
         self._quantidade -= 1
@@ -39,3 +39,32 @@ class Fila:
     def tamanho(self):
         """Retorna a quantidade de elementos na fila"""
         return self._quantidade
+
+    def consulta(self):
+        """Retorna o valor do primeiro elemento da lista"""
+        if self.vazia():
+            raise Exception("Fila vazia")
+        return self.inicio
+    
+    def vazia(self):
+        """Verifica se a lista está vazia"""
+        if self._quantidade == 0:
+            return True
+        return False
+
+    def __repr__(self):
+        """Representa a lista excluindo os obj NoneType"""
+        tam = "\033[1;34m" + f"{self.max}" + "\033[0;0m"
+        rep = f"Fila[{tam}] = ["
+        cont = self.inicio
+        for i in range(self._quantidade):
+            if cont == self.max:
+                cont = 0
+            if i != self._quantidade-1:
+                rep += f"{self.fila[cont]}, "
+            else:
+                rep += f"{self.fila[cont]}"
+            cont += 1
+        rep += "]"
+        return rep
+        
