@@ -115,6 +115,6 @@ class Lista:
     def __repr__(self):
         """Representa a lista excluindo os obj NoneType"""
         tam = "\033[1;34m" + f"{self.max}" + "\033[0;0m"
-        rep = f"a[{tam}] = "
+        rep = f"Lista[{tam}] = "
         rep += f"{[self.lista[x] for x in range(0, self._quantidade)]}"
         return rep
