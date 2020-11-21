@@ -55,7 +55,6 @@ class LinkedList:
             ponteiro.prox = ponteiro.prox.prox
         self._quantidade -= 1
 
-    
     def index(self, elem):
         """Retorna o índice da primeira aparição de um elemento"""
         ponteiro = self.primeiro
