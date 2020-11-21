@@ -26,7 +26,7 @@ class Lista:
 
     def remove(self, elem):
         """Deleta a primeira aparição de um elemento na lista"""
-        if self._quantidade == 0:
+        if self.empty():
             raise "Lista vazia"
         index = self.index(elem)
         elem = None
@@ -34,6 +34,12 @@ class Lista:
         for i in range(index, self._quantidade-1, +1):
             self.lista[i], self.lista[i+1] = self.lista[i+1], self.lista[i]
         self._quantidade -= 1
+    
+    def empty(self):
+        """Verifica se a lista está vazia"""
+        if self._quantidade == 0:
+            return True
+        return False
 
     def insert(self, index, elem):
         """Inserte um elemento em uma posição qualquer da lista"""
@@ -51,7 +57,7 @@ class Lista:
         """Deleta um item da lista, baseado em seu índice e retorna o seu valor"""
         if index >= self._quantidade:
             raise IndexError("Index fora do intervalo da lista")
-        if self._quantidade == 0:
+        if self.empty():
             raise IndexError("Lista vazia")
         elem, self.lista[index] = self.lista[index], None
         for i in range(index, self._quantidade-1, +1):
@@ -103,7 +109,7 @@ class Lista:
 
     def __delitem__(self, index):
         """Deleta um item da lista, baseado em seu índice"""
-        if self._quantidade == 0:
+        if self.empty():
             raise IndexError("Lista vazia")
         if index >= self._quantidade:
             raise IndexError("Index fora do intervalo da lista")

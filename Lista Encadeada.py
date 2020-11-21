@@ -30,42 +30,25 @@ class ListaEncadeada:
         else:
             self.primeiro = No(elem)
         self._quantidade += 1
-    
-    def __len__(self):
-        """Retorna o tamanho da lista"""
-        return self._quantidade
 
-    def __getitem__(self, index):
-        """Retorna o valor de um nó da lista a partir de um índice"""
-        ponteiro = self.getItemByIndex(index)
-        return ponteiro.data
-
-    def __setitem__(self, index, elem):
-        """Atribui um novo valor a um nó a partir de um índice"""
-        ponteiro = self.getItemByIndex(index)
-        ponteiro.data = elem
-        
-    def __delitem__(self, index):
-        """Remove um nó da lista a partir de um índice"""
+    def remove(self, elem):
+        """Deleta a primeira aparição de um elemento na lista"""
+        if self.empty():
+            raise Exception("Lista Vazia")
+        index = self.index(elem)
         if index == 0:
-            ponteiro = self.getItemByIndex(index)
-            self.primeiro = ponteiro.prox
+            self.primeiro = self.primeiro.prox
+            self._quantidade -= 1
         else:
             ponteiro = self.getItemByIndex(index-1)
             ponteiro.prox = ponteiro.prox.prox
-        self._quantidade -= 1
+            self._quantidade -= 1
 
-    def index(self, elem):
-        """Retorna o índice da primeira aparição de um elemento"""
-        ponteiro = self.primeiro
-        cont = 0
-        while(ponteiro):
-            if ponteiro.data == elem:
-                return cont
-            else:
-                ponteiro = ponteiro.prox
-                cont += 1
-        raise ValueError(f"{elem} não está na lista")
+    def empty(self):
+        """Verifica se a lista está vazia"""
+        if self._quantidade == 0:
+            return True
+        return False
 
     def insert(self, index, elem):
         """Insere um novo nó a partir de um índice"""
@@ -81,12 +64,74 @@ class ListaEncadeada:
             self._quantidade += 1
         else:
             self.append(elem)
+    
+    def pop(self, index):
+        """Deleta um item da lista, baseado em seu índice e retorna o seu valor"""
+        if self.empty():
+            raise Exception("Lista vazia")
+        if index >= self._quantidade:
+            raise IndexError("Índice fora do intervalo")
+        if index == 0:
+            elem = self.primeiro.data
+            self.primeiro = self.primeiro.prox
+            self._quantidade -= 1
+            return elem
+        ponteiro = self.getItemByIndex(index-1)
+        elem = ponteiro.prox.data
+        ponteiro.prox = ponteiro.prox.prox
+        self._quantidade -= 1
+        return elem
 
-    def empty(self):
-        """Verifica se a lista está vazia"""
-        if self._quantidade == 0:
-            return True
-        return False
+    def clear(self):
+        """Restaura a lista para seu ponto inicial(Vazia)"""
+        self.primeiro = None
+        self._quantidade = 0
+
+    def count(self, elem):
+        """Conta o número de aparições de um determinado elemento na lista"""
+        ponteiro = self.primeiro
+        cont = 0
+        while(ponteiro != None):
+            if ponteiro.data == elem:
+                cont += 1
+            ponteiro = ponteiro.prox
+        return cont
+
+    def index(self, elem):
+        """Retorna o índice da primeira aparição de um elemento"""
+        ponteiro = self.primeiro
+        cont = 0
+        while(ponteiro):
+            if ponteiro.data == elem:
+                return cont
+            else:
+                ponteiro = ponteiro.prox
+                cont += 1
+        raise ValueError(f"{elem} não está na lista")
+
+    def __len__(self):
+        """Retorna o tamanho da lista"""
+        return self._quantidade
+
+    def __getitem__(self, index):
+        """Retorna o valor de um nó da lista a partir de um índice"""
+        ponteiro = self.getItemByIndex(index)
+        return ponteiro.data
+
+    def __setitem__(self, index, elem):
+        """Atribui um novo valor a um nó a partir de um índice"""
+        ponteiro = self.getItemByIndex(index)
+        ponteiro.data = elem
+
+    def __delitem__(self, index):
+        """Remove um nó da lista a partir de um índice"""
+        if index == 0:
+            ponteiro = self.getItemByIndex(index)
+            self.primeiro = ponteiro.prox
+        else:
+            ponteiro = self.getItemByIndex(index-1)
+            ponteiro.prox = ponteiro.prox.prox
+        self._quantidade -= 1
 
     def __repr__(self):
         """Método para representação da lista encadeada"""
