@@ -1,5 +1,5 @@
 class Fila:
-    """Representaçãõ de um estrutura de fila sequencial em python (sem prioridade)"""
+    """Representaçãõ de um estrutura de fila sequencial circular em python (sem prioridade)"""
     def __init__(self, maximo):
         self.max = maximo # Tamanho máximo da fila
         self.fila = [None] * maximo # Fila iniciada com tamanho definido
@@ -41,7 +41,7 @@ class Fila:
         return self._quantidade
 
     def consulta(self):
-        """Retorna o valor do primeiro elemento da lista"""
+        """Retorna o valor do primeiro elemento da fila"""
         if self.vazia():
             raise Exception("Fila vazia")
         return self.inicio
@@ -53,7 +53,7 @@ class Fila:
         return False
 
     def __repr__(self):
-        """Representa a lista excluindo os obj NoneType"""
+        """Representa a fila excluindo os obj NoneType"""
         tam = "\033[1;34m" + f"{self.max}" + "\033[0;0m"
         rep = f"Fila[{tam}] = ["
         cont = self.inicio

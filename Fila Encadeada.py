@@ -27,7 +27,7 @@ class FilaEncadeada:
     def desenfileirar(self):
         """Retira o primeiro elemento da fila"""
         if self._quantidade == 0:
-            raise Exception("Lista vazia")
+            raise Exception("Fila vazia")
         self.inicio = self.inicio.prox
         self._quantidade -= 1
     
@@ -38,11 +38,11 @@ class FilaEncadeada:
     def consulta(self):
         """Retorna o valor do primeiro elemento da fila"""
         if self.vazia():
-            raise Exception("Lista vazia")
+            raise Exception("Fila vazia")
         return self.inicio.data
 
     def vazia(self):
-        """Verifica se a lista está ou não vazia"""
+        """Verifica se a fila está ou não vazia"""
         if self._quantidade == 0:
             return True
         return False
