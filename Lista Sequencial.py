@@ -1,8 +1,9 @@
-class Lista:
-    def __init__(self, maximo):
-        self.max = maximo # Tamanho máximo da lista
-        self.lista = [None] * maximo # Lista iniciada com tamanho definido
-        self._quantidade = 0 # Indica lista inicialmente vazia
+class List:
+    """Representação de uma Lista sequencial estática em Python3"""
+    def __init__(self, maximum):
+        self.max = maximum # Tamanho máximo da lista
+        self.list = [None] * maximum # Lista iniciada com tamanho definido
+        self._size = 0 # Indica lista inicialmente vazia
 
     @property
     def max(self):
@@ -10,117 +11,117 @@ class Lista:
         return self._max
 
     @max.setter
-    def max(self, maximo):
+    def max(self, maximum):
         """Garante que max tenha um valor inteiro"""
-        if isinstance(maximo, int):
-            self._max = maximo
+        if isinstance(maximum, int):
+            self._max = maximum
         else:
             raise Exception("Atributo deve ser um número inteiro")
 
     def append(self, elem):
         """Adiciona um elemento ao final da lista"""
-        if self.max == self._quantidade:
+        if self.max == self._size:
             raise "Lista Cheia"
-        self.lista[self._quantidade] = elem
-        self._quantidade += 1
+        self.list[self._size] = elem
+        self._size += 1
 
     def remove(self, elem):
         """Deleta a primeira aparição de um elemento na lista"""
-        if self.empty():
+        if self._size == 0:
             raise "Lista vazia"
         index = self.index(elem)
         elem = None
-        elem, self.lista[index] = self.lista[index], None
-        for i in range(index, self._quantidade-1, +1):
-            self.lista[i], self.lista[i+1] = self.lista[i+1], self.lista[i]
-        self._quantidade -= 1
+        elem, self.list[index] = self.list[index], None
+        for i in range(index, self._size-1, +1):
+            self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
+        self._size -= 1
     
     def empty(self):
         """Verifica se a lista está vazia"""
-        if self._quantidade == 0:
+        if self._size == 0:
             return True
         return False
 
     def insert(self, index, elem):
         """Inserte um elemento em uma posição qualquer da lista"""
-        if self.max == self._quantidade:
+        if self.max == self._size:
             raise "Lista Cheia"
-        if index >= self._quantidade:
+        if index >= self._size:
             self.append(elem)
             return
-        for i in range(self._quantidade, index, -1):
-            self.lista[i], self.lista[i-1] = self.lista[i-1], self.lista[i]
-        self.lista[index] = elem
-        self._quantidade += 1
+        for i in range(self._size, index, -1):
+            self.list[i], self.list[i-1] = self.list[i-1], self.list[i]
+        self.list[index] = elem
+        self._size += 1
 
     def pop(self, index):
         """Deleta um item da lista, baseado em seu índice e retorna o seu valor"""
-        if index >= self._quantidade:
+        if index >= self._size:
             raise IndexError("Index fora do intervalo da lista")
-        if self.empty():
+        if self._size == 0:
             raise IndexError("Lista vazia")
-        elem, self.lista[index] = self.lista[index], None
-        for i in range(index, self._quantidade-1, +1):
-            self.lista[i], self.lista[i+1] = self.lista[i+1], self.lista[i]
-        self._quantidade -= 1
+        elem, self.list[index] = self.list[index], None
+        for i in range(index, self._size-1, +1):
+            self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
+        self._size -= 1
         return elem 
 
     def clear(self):
         """Restaura a lista para seu ponto inicial(Vazia)"""
-        for i in range(self._quantidade):
-            self.lista[i] = None
-        self._quantidade = 0
+        for i in range(self._size):
+            self.list[i] = None
+        self._size = 0
 
     def count(self, elem):
         """Conta o número de aparições de um determinado elemento na lista"""
         cont = 0
-        for i in range(self._quantidade):
-            if self.lista[i] == elem:
+        for i in range(self._size):
+            if self.list[i] == elem:
                 cont += 1
         return cont
     
     def index(self, elem):
         """Retorna o primeiro index de um determinado elemento da lista"""
-        for i in range(self._quantidade):
-            if self.lista[i] == elem:
+        for i in range(self._size):
+            if self.list[i] == elem:
                 return i
         raise ValueError(f"{elem} não está na lista.")
 
     def __len__(self):
         """Retorna a quantidade de elementos da lista"""
-        return self._quantidade
+        return self._size
 
     def __getitem__(self, index):
         """Retorna o valor de uma posição da lista"""
-        if index >= self._quantidade or abs(index) > self._quantidade:
+        if index >= self._size or abs(index) > self._size:
             raise IndexError("Índice fora do intervalo da lista")
         if index < 0:
-            return self.lista[self._quantidade+index]
-        return self.lista[index]
+            return self.list[self._size+index]
+        return self.list[index]
 
     def __setitem__(self, index, elem):
         """Atribuição de valor a uma posição qualquer da lista"""
-        if index >= self._quantidade or abs(index) > self._quantidade:
+        if index >= self._size or abs(index) > self._size:
             raise IndexError("Atribuição fora do intervalo da lista")
         if index < 0:
-            self.lista[self._quantidade+index] = elem
+            self.list[self._size+index] = elem
         else:
-            self.lista[index] = elem
+            self.list[index] = elem
 
     def __delitem__(self, index):
         """Deleta um item da lista, baseado em seu índice"""
-        if self.empty():
+        if self._size == 0:
             raise IndexError("Lista vazia")
-        if index >= self._quantidade:
+        if index >= self._size:
             raise IndexError("Index fora do intervalo da lista")
-        self.lista[index] = None
-        for i in range(index, self._quantidade-1, +1):
-            self.lista[i], self.lista[i+1] = self.lista[i+1], self.lista[i]
-        self._quantidade -= 1
+        self.list[index] = None
+        for i in range(index, self._size-1, +1):
+            self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
+        self._size -= 1
 
     def __repr__(self):
         """Representa a lista excluindo os obj NoneType"""
         tam = "\033[1;34m" + f"{self.max}" + "\033[0;0m"
         rep = f"Lista[{tam}] = "
-        rep += f"{[self.lista[x] for x in range(0, self._quantidade)]}"
+        rep += f"{[self.list[x] for x in range(0, self._size)]}"
         return rep

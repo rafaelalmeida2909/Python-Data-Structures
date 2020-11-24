@@ -1,60 +1,60 @@
-class No:
+class Node:
     """Representação de um nó em python. Com ele é possível criar uma fila encadeada"""
     def __init__(self, data):
         self.data = data # Valor do nó
-        self.prox = None # Próximo nó
+        self.next = None # Próximo nó
 
-class FilaEncadeada:
+class LinkedQueue:
     """Representaçãõ de um estrutura de fila encadeada em python (sem prioridade)"""
     def __init__(self):
-        self.inicio = None # Define o elemento que deverá sair primeiro da fila
-        self.final = None # Define o último elemento da fila
-        self._quantidade = 0 # Atributo privado que diz o nº de elementos na fila
+        self.front = None # Define o elemento que deverá sair primeiro da fila
+        self.back = None # Define o último elemento da fila
+        self._size = 0 # Atributo privado que diz o nº de elementos na fila
 
-    def enfileirar(self, elem):
+    def enqueue(self, elem):
         """Adiciona um elemento ao fim da fila"""
-        if self._quantidade == 0:
-            aux = No(elem)
-            self.inicio = aux
-            self.final = aux
+        if self._size == 0:
+            aux = Node(elem)
+            self.front = aux
+            self.back = aux
         else:
-            ponteiro = self.final
-            aux = No(elem)
-            ponteiro.prox = aux
-            self.final = aux
-        self._quantidade += 1
+            pointer = self.back
+            aux = Node(elem)
+            pointer.next = aux
+            self.back = aux
+        self._size += 1
 
-    def desenfileirar(self):
+    def dequeue(self):
         """Retira o primeiro elemento da fila"""
-        if self._quantidade == 0:
+        if self._size == 0:
             raise Exception("Fila vazia")
-        self.inicio = self.inicio.prox
-        self._quantidade -= 1
+        self.front = self.front.next
+        self._size -= 1
     
-    def tamanho(self):
+    def length(self):
         """Retorna a quantidade de elementos na fila"""
-        return self._quantidade
+        return self._size
 
     def consulta(self):
         """Retorna o valor do primeiro elemento da fila"""
-        if self.vazia():
+        if self._size == 0:
             raise Exception("Fila vazia")
-        return self.inicio.data
+        return self.front.data
 
-    def vazia(self):
+    def empty(self):
         """Verifica se a fila está ou não vazia"""
-        if self._quantidade == 0:
+        if self._size == 0:
             return True
         return False
 
     def __repr__(self):
         """Método para representação da fila encadeada"""
         rep = "\033[1;31m" + "frente" + "\033[0;0m" + " -> "
-        ponteiro = self.inicio
-        while(ponteiro != None):
-            rep += f"{ponteiro.data} -> "
-            if ponteiro.prox is None:
+        pointer = self.front
+        while(pointer != None):
+            rep += f"{pointer.data} -> "
+            if pointer.next is None:
                 break
-            ponteiro = ponteiro.prox
+            pointer = pointer.next
         rep += "\033[1;34m" + "None" + "\033[0;0m"
         return rep

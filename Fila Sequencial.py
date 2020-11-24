@@ -1,11 +1,11 @@
-class Fila:
+class Queue:
     """Representaçãõ de um estrutura de fila sequencial circular em python (sem prioridade)"""
-    def __init__(self, maximo):
-        self.max = maximo # Tamanho máximo da fila
-        self.fila = [None] * maximo # Fila iniciada com tamanho definido
-        self.inicio = 0 # Define o elemento que deverá sair primeiro da fila
-        self._quantidade = 0 # Atributo privado que diz o nº de elementos na fila
-        self.final = 0 # Define o último elemento da fila
+    def __init__(self, maximum):
+        self.max = maximum # Tamanho máximo da fila
+        self.queue = [None] * maximum # Fila iniciada com tamanho definido
+        self.front = 0 # Define o elemento que deverá sair primeiro da fila
+        self._size = 0 # Atributo privado que diz o nº de elementos na fila
+        self.back = 0 # Define o último elemento da fila
 
     @property
     def max(self):
@@ -13,42 +13,42 @@ class Fila:
         return self._max
 
     @max.setter
-    def max(self, maximo):
+    def max(self, maximum):
         """Garante que max tenha um valor inteiro"""
-        if isinstance(maximo, int):
-            self._max = maximo
+        if isinstance(maximum, int):
+            self._max = maximum
         else:
             raise Exception("Atributo deve ser um número inteiro")
     
-    def enfileirar(self, elem):
+    def enqueue(self, elem):
         """Adiciona um elemento ao fim da fila"""
-        if self._quantidade == self.max: # Verifica se a fila está cheia
+        if self._size == self.max: # Verifica se a fila está cheia
             raise Exception("Fila Cheia!")
-        self.fila[self.final] = elem
-        self.final = (self.final + 1) % self.max # Garante uma fila circular 
-        self._quantidade += 1
+        self.queue[self.back] = elem
+        self.back = (self.back + 1) % self.max # Garante uma fila circular 
+        self._size += 1
 
-    def desenfileirar(self):
+    def dequeue(self):
         """Retira o primeiro elemento da fila"""
-        if self._quantidade == 0: # Verifica se a fila está vazia
+        if self._size == 0: # Verifica se a fila está vazia
             raise Exception("Fila Vazia!")
-        self.fila[self.inicio] = None
-        self.inicio = (self.inicio + 1) % self.max # Garante uma fila circular
-        self._quantidade -= 1
+        self.queue[self.front] = None
+        self.front = (self.front + 1) % self.max # Garante uma fila circular
+        self._size -= 1
     
-    def tamanho(self):
+    def length(self):
         """Retorna a quantidade de elementos na fila"""
-        return self._quantidade
+        return self._size
 
-    def consulta(self):
+    def peek(self):
         """Retorna o valor do primeiro elemento da fila"""
-        if self.vazia():
+        if self._size == 0:
             raise Exception("Fila vazia")
-        return self.inicio
+        return self.front
     
-    def vazia(self):
+    def empty(self):
         """Verifica se a lista está vazia"""
-        if self._quantidade == 0:
+        if self._size == 0:
             return True
         return False
 
@@ -56,14 +56,14 @@ class Fila:
         """Representa a fila excluindo os obj NoneType"""
         tam = "\033[1;34m" + f"{self.max}" + "\033[0;0m"
         rep = f"Fila[{tam}] = ["
-        cont = self.inicio
-        for i in range(self._quantidade):
+        cont = self.front
+        for i in range(self._size):
             if cont == self.max:
                 cont = 0
-            if i != self._quantidade-1:
-                rep += f"{self.fila[cont]}, "
+            if i != self._size-1:
+                rep += f"{self.queue[cont]}, "
             else:
-                rep += f"{self.fila[cont]}"
+                rep += f"{self.queue[cont]}"
             cont += 1
         rep += "]"
         return rep
