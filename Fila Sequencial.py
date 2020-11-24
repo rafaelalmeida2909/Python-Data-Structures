@@ -32,9 +32,11 @@ class Queue:
         """Retira o primeiro elemento da fila"""
         if self._size == 0: # Verifica se a fila está vazia
             raise Exception("Fila Vazia!")
+        elem = self.queue[self.front]
         self.queue[self.front] = None
         self.front = (self.front + 1) % self.max # Garante uma fila circular
         self._size -= 1
+        return elem
     
     def length(self):
         """Retorna a quantidade de elementos na fila"""
@@ -44,7 +46,7 @@ class Queue:
         """Retorna o valor do primeiro elemento da fila"""
         if self._size == 0:
             raise Exception("Fila vazia")
-        return self.front
+        return self.queue[self.front]
     
     def empty(self):
         """Verifica se a lista está vazia"""

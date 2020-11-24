@@ -28,14 +28,16 @@ class LinkedQueue:
         """Retira o primeiro elemento da fila"""
         if self._size == 0:
             raise Exception("Fila vazia")
+        elem = self.front.data
         self.front = self.front.next
         self._size -= 1
+        return elem
     
     def length(self):
         """Retorna a quantidade de elementos na fila"""
         return self._size
 
-    def consulta(self):
+    def peek(self):
         """Retorna o valor do primeiro elemento da fila"""
         if self._size == 0:
             raise Exception("Fila vazia")
