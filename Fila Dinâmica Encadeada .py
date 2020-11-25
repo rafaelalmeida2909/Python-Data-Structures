@@ -1,11 +1,11 @@
 class Node:
-    """Representação de um nó em python. Com ele é possível criar uma fila encadeada"""
+    """Representação de um nó em Python3. Com ele é possível criar uma fila encadeada"""
     def __init__(self, data):
         self.data = data # Valor do nó
         self.next = None # Próximo nó
 
 class LinkedQueue:
-    """Representaçãõ de um estrutura de fila encadeada em python (sem prioridade)"""
+    """Representação de um estrutura de fila dinâmica encadeada em Python3 (sem prioridade)"""
     def __init__(self):
         self.front = None # Define o elemento que deverá sair primeiro da fila
         self.back = None # Define o último elemento da fila

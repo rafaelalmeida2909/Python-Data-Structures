@@ -1,11 +1,11 @@
 class Node:
-    """Representação de um nó em python. Com ele é possível criar uma lista encadeada"""
+    """Representação de um nó em Python3. Com ele é possível criar uma lista encadeada"""
     def __init__(self, data):
         self.data = data # Valor do nó
         self.next = None # Próximo nó
 
 class LinkedList:
-    """Representação de uma lista encadeada em python, onde cada elemento, é uma instância da classe nó"""
+    """Representação de uma lista dinâmica encadeada em Python3, onde cada elemento, é uma instância da classe nó"""
     def __init__(self):
         self.first = None # Primeiro elemento da lista encadeada
         self._size = 0 # Define o nº de elementos na lista

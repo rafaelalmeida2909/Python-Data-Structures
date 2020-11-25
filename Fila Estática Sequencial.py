@@ -1,5 +1,5 @@
 class Queue:
-    """Representaçãõ de um estrutura de fila sequencial circular em python (sem prioridade)"""
+    """Representação de um estrutura de fila estática sequencial circular em Python3 (sem prioridade)"""
     def __init__(self, maximum):
         self.max = maximum # Tamanho máximo da fila
         self.queue = [None] * maximum # Fila iniciada com tamanho definido

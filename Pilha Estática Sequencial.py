@@ -1,5 +1,5 @@
 class Stack:
-    """Representação de uma Pilha sequencial estática em Python3"""
+    """Representação de uma Pilha estática sequencial em Python3"""
     def __init__(self, maximum):
         self.max = maximum # Define tamanho reservado para pilha
         self.stack = [None] * maximum # Pilha iniciada com tamanho definido

@@ -1,5 +1,5 @@
 class List:
-    """Representação de uma Lista sequencial estática em Python3"""
+    """Representação de uma Lista estática sequencial em Python3"""
     def __init__(self, maximum):
         self.max = maximum # Tamanho máximo da lista
         self.list = [None] * maximum # Lista iniciada com tamanho definido
