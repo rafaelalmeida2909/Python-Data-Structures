@@ -35,8 +35,8 @@ class Stack:
 
     def top(self):
         """retorna o elemento no topo da pilha"""
-        if self.stack[self._size-1] is None:
-            return str(None)
+        if self._size == 0:
+            raise Exception("Pilha vazia")
         return self.stack[self._size-1]
 
     def empty(self):
