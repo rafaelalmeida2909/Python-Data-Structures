@@ -51,7 +51,7 @@ class Stack:
             return True
         return False
     
-    def size(self):
+    def length(self):
         """Retorna o tamanho da pilha"""
         return self._size
 
