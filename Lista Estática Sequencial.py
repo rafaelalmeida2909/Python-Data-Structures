@@ -119,6 +119,10 @@ class List:
             self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
         self._size -= 1
 
+    def __del__(self):
+        """Método destrutor"""
+        print("Objeto deletado")
+        
     def __str__(self):
         """Representa a lista excluindo os obj NoneType"""
         tam = "\033[1;34m" + f"{self.max}" + "\033[0;0m"

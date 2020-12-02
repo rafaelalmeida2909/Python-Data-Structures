@@ -54,6 +54,10 @@ class Queue:
             return True
         return False
 
+    def __del__(self):
+        """Método destrutor"""
+        print("Objeto deletado")
+
     def __str__(self):
         """Representa a fila excluindo os obj NoneType"""
         tam = "\033[1;34m" + f"{self.max}" + "\033[0;0m"

@@ -49,6 +49,10 @@ class LinkedQueue:
             return True
         return False
 
+    def __del__(self):
+        """Método destrutor"""
+        print("Objeto deletado")
+
     def __str__(self):
         """Método para representação da fila encadeada"""
         rep = "\033[1;31m" + "frente" + "\033[0;0m" + " -> "

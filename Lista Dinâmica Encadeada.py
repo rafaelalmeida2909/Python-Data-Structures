@@ -133,6 +133,10 @@ class LinkedList:
             pointer.next = pointer.next.next
         self._size -= 1
 
+    def __del__(self):
+        """Método destrutor"""
+        print("Objeto deletado")
+
     def __str__(self):
         """Método para representação da lista encadeada"""
         rep = "\033[1;31m" + "head" + "\033[0;0m" + " -> "

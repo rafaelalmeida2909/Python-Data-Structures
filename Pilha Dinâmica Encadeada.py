@@ -44,6 +44,10 @@ class LinkedStack:
         """Retorna o tamanho da pilha"""
         return self._size
 
+    def __del__(self):
+        """Método destrutor"""
+        print("Objeto deletado")
+
     def __str__(self):
         """Representa a pilha excluindo os obj NoneType"""
         rep = "\033[1;34m" + "topo -> " + "\033[0;0m"
