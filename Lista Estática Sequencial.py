@@ -119,9 +119,13 @@ class List:
             self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
         self._size -= 1
 
-    def __repr__(self):
+    def __str__(self):
         """Representa a lista excluindo os obj NoneType"""
         tam = "\033[1;34m" + f"{self.max}" + "\033[0;0m"
         rep = f"Lista[{tam}] = "
         rep += f"{[self.list[x] for x in range(0, self._size)]}"
         return rep
+
+    def __repr__(self):
+    	return str(self)
+    	

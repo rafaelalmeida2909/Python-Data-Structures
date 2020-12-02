@@ -55,7 +55,7 @@ class Stack:
         """Retorna o tamanho da pilha"""
         return self._size
 
-    def __repr__(self):
+    def __str__(self):
         """Representa a pilha excluindo os obj NoneType"""
         rep = "\033[1;34m" + "topo -> " + "\033[0;0m"
         if self._size == 0:
@@ -71,4 +71,7 @@ class Stack:
             else:
                 rep += f"\n{str(self.stack[i]).rjust(10)}"
         return rep
+
+    def __repr__(self):
+    	return str(self)
         

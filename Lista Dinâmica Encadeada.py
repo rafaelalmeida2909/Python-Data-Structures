@@ -133,7 +133,7 @@ class LinkedList:
             pointer.next = pointer.next.next
         self._size -= 1
 
-    def __repr__(self):
+    def __str__(self):
         """Método para representação da lista encadeada"""
         rep = "\033[1;31m" + "head" + "\033[0;0m" + " -> "
         pointer = self.first
@@ -144,3 +144,7 @@ class LinkedList:
             pointer = pointer.next
         rep += "\033[1;34m" + "None" + "\033[0;0m"
         return rep
+
+    def __repr__(self):
+    	return str(self)
+    	

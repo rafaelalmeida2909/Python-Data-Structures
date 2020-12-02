@@ -49,7 +49,7 @@ class LinkedQueue:
             return True
         return False
 
-    def __repr__(self):
+    def __str__(self):
         """Método para representação da fila encadeada"""
         rep = "\033[1;31m" + "frente" + "\033[0;0m" + " -> "
         pointer = self.front
@@ -60,3 +60,7 @@ class LinkedQueue:
             pointer = pointer.next
         rep += "\033[1;34m" + "None" + "\033[0;0m"
         return rep
+
+    def __repr__(self):
+    	return str(self)
+    	
