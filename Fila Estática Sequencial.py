@@ -4,9 +4,9 @@ class Queue:
     def __init__(self, maximum):
         self.max = maximum  # Tamanho máximo da fila
         self.queue = [None] * maximum  # Fila iniciada com tamanho definido
-        self.front = 0  # Define o elemento que deverá sair primeiro da fila
+        self._front = 0  # Define o elemento que deverá sair primeiro da fila
         self._size = 0  # Atributo privado que diz o nº de elementos na fila
-        self.back = 0  # Define o último elemento da fila
+        self._back = 0  # Define o último elemento da fila
 
     @property
     def max(self):
@@ -25,17 +25,17 @@ class Queue:
         """Adiciona um elemento ao fim da fila"""
         if self._size == self.max:  # Verifica se a fila está cheia
             raise Exception("Fila Cheia!")
-        self.queue[self.back] = elem
-        self.back = (self.back + 1) % self.max  # Garante uma fila circular
+        self.queue[self._back] = elem
+        self._back = (self._back + 1) % self.max  # Garante uma fila circular
         self._size += 1
 
     def dequeue(self):
         """Retira o primeiro elemento da fila"""
         if self._size == 0:  # Verifica se a fila está vazia
             raise Exception("Fila Vazia!")
-        elem = self.queue[self.front]
-        self.queue[self.front] = None
-        self.front = (self.front + 1) % self.max  # Garante uma fila circular
+        elem = self.queue[self._front]
+        self.queue[self._front] = None
+        self._front = (self._front + 1) % self.max  # Garante uma fila circular
         self._size -= 1
         return elem
 
@@ -43,11 +43,17 @@ class Queue:
         """Retorna a quantidade de elementos na fila"""
         return self._size
 
-    def peek(self):
+    def first(self):
         """Retorna o valor do primeiro elemento da fila"""
         if self._size == 0:
             raise Exception("Fila vazia")
-        return self.queue[self.front]
+        return self.queue[self._front]
+
+    def last(self):
+        """Retorna o valor do último elemento da fila"""
+        if self._size == 0:
+            raise Exception("Fila vazia")
+        return self.queue[self._back-1]
 
     def empty(self):
         """Verifica se a lista está vazia"""
@@ -60,18 +66,15 @@ class Queue:
 
     def __str__(self):
         """Representa a fila excluindo os obj NoneType"""
-        tam = "\033[1;34m" + f"{self.max}" + "\033[0;0m"
-        rep = f"Fila[{tam}] = ["
-        cont = self.front
+        tam = f"\033[1;32m{self.max}\033[0;0m"
+        rep = f"[{tam}]\033[1;31mfirst\033[0;0m -> "
+        cont = self._front
         for i in range(self._size):
             if cont == self.max:
                 cont = 0
-            if i != self._size-1:
-                rep += f"{self.queue[cont]}, "
-            else:
-                rep += f"{self.queue[cont]}"
+            rep += f"{self.queue[cont]} -> "
             cont += 1
-        rep += "]"
+        rep += "\033[1;34mNone\033[0;0m"
         return rep
 
     def __repr__(self):

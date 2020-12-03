@@ -10,29 +10,29 @@ class LinkedQueue:
     """Representação de um estrutura de fila dinâmica encadeada em Python3 (sem prioridade)"""
 
     def __init__(self):
-        self.front = None  # Define o elemento que deverá sair primeiro da fila
-        self.back = None  # Define o último elemento da fila
+        self._front = None  # Define o elemento que deverá sair primeiro da fila
+        self._back = None  # Define o último elemento da fila
         self._size = 0  # Atributo privado que diz o nº de elementos na fila
 
     def enqueue(self, elem):
         """Adiciona um elemento ao fim da fila"""
         if self._size == 0:
             aux = Node(elem)
-            self.front = aux
-            self.back = aux
+            self._front = aux
+            self._back = aux
         else:
-            pointer = self.back
+            pointer = self._back
             aux = Node(elem)
             pointer.next = aux
-            self.back = aux
+            self._back = aux
         self._size += 1
 
     def dequeue(self):
         """Retira o primeiro elemento da fila"""
         if self._size == 0:
             raise Exception("Fila vazia")
-        elem = self.front.data
-        self.front = self.front.next
+        elem = self._front.data
+        self._front = self._front.next
         self._size -= 1
         return elem
 
@@ -40,11 +40,17 @@ class LinkedQueue:
         """Retorna a quantidade de elementos na fila"""
         return self._size
 
-    def peek(self):
+    def first(self):
         """Retorna o valor do primeiro elemento da fila"""
         if self._size == 0:
             raise Exception("Fila vazia")
-        return self.front.data
+        return self._front.data
+
+    def last(self):
+        """Retorna o valor do último elemento da fila"""
+        if self._size == 0:
+            raise Exception("Fila vazia")
+        return self._back.data
 
     def empty(self):
         """Verifica se a fila está ou não vazia"""
@@ -57,14 +63,14 @@ class LinkedQueue:
 
     def __str__(self):
         """Método para representação da fila encadeada"""
-        rep = "\033[1;31m" + "frente" + "\033[0;0m" + " -> "
-        pointer = self.front
+        rep = "\033[1;31m" + "first" + "\033[0;0m" + " -> "
+        pointer = self._front
         while(pointer != None):
             rep += f"{pointer.data} -> "
             if pointer.next is None:
                 break
             pointer = pointer.next
-        rep += "\033[1;34m" + "None" + "\033[0;0m"
+        rep += "\033[1;34mNone\033[0;0m"
         return rep
 
     def __repr__(self):
