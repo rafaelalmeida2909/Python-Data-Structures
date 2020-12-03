@@ -1,9 +1,10 @@
 class Stack:
     """Representação de uma Pilha estática sequencial em Python3"""
+
     def __init__(self, maximum):
-        self.max = maximum # Define tamanho reservado para pilha
-        self.stack = [None] * maximum # Pilha iniciada com tamanho definido
-        self._size = 0 # Tamanho atual da pilha
+        self.max = maximum  # Define tamanho reservado para pilha
+        self.stack = [None] * maximum  # Pilha iniciada com tamanho definido
+        self._size = 0  # Tamanho atual da pilha
 
     @property
     def max(self):
@@ -44,20 +45,19 @@ class Stack:
         if self._size == 0:
             return True
         return False
-    
+
     def full(self):
         """Verifica se a pilha está cheia"""
         if self._size == self.max:
             return True
         return False
-    
+
     def length(self):
         """Retorna o tamanho da pilha"""
         return self._size
 
     def __del__(self):
         """Método destrutor"""
-        print("Objeto deletado")
 
     def __str__(self):
         """Representa a pilha excluindo os obj NoneType"""
@@ -77,5 +77,4 @@ class Stack:
         return rep
 
     def __repr__(self):
-    	return str(self)
-        
+        return str(self)

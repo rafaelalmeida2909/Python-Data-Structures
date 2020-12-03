@@ -1,14 +1,17 @@
 class Node:
     """Representação de um nó em Python3. Com ele é possível criar uma lista encadeada"""
+
     def __init__(self, data):
-        self.data = data # Valor do nó
-        self.next = None # Próximo nó
+        self.data = data  # Valor do nó
+        self.next = None  # Próximo nó
+
 
 class LinkedList:
     """Representação de uma lista dinâmica encadeada em Python3, onde cada elemento, é uma instância da classe nó"""
+
     def __init__(self):
-        self.first = None # Primeiro elemento da lista encadeada
-        self._size = 0 # Define o nº de elementos na lista
+        self.first = None  # Primeiro elemento da lista encadeada
+        self._size = 0  # Define o nº de elementos na lista
 
     def getItemByIndex(self, index):
         """Método auxiliar que encontra o nó a partir do índice"""
@@ -22,7 +25,7 @@ class LinkedList:
 
     def append(self, elem):
         """Adiciona um novo nó ao final da lista"""
-        if self.first: # Se não for None
+        if self.first:  # Se não for None
             pointer = self.first
             while(pointer.next):
                 pointer = pointer.next
@@ -64,7 +67,7 @@ class LinkedList:
             self._size += 1
         else:
             self.append(elem)
-    
+
     def pop(self, index):
         """Deleta um item da lista, baseado em seu índice e retorna o seu valor"""
         if self._size == 0:
@@ -135,7 +138,6 @@ class LinkedList:
 
     def __del__(self):
         """Método destrutor"""
-        print("Objeto deletado")
 
     def __str__(self):
         """Método para representação da lista encadeada"""
@@ -150,5 +152,4 @@ class LinkedList:
         return rep
 
     def __repr__(self):
-    	return str(self)
-    	
+        return str(self)

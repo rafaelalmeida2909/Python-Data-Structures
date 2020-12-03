@@ -1,9 +1,10 @@
 class List:
     """Representação de uma Lista estática sequencial em Python3"""
+
     def __init__(self, maximum):
-        self.max = maximum # Tamanho máximo da lista
-        self.list = [None] * maximum # Lista iniciada com tamanho definido
-        self._size = 0 # Indica lista inicialmente vazia
+        self.max = maximum  # Tamanho máximo da lista
+        self.list = [None] * maximum  # Lista iniciada com tamanho definido
+        self._size = 0  # Indica lista inicialmente vazia
 
     @property
     def max(self):
@@ -35,7 +36,7 @@ class List:
         for i in range(index, self._size-1, +1):
             self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
         self._size -= 1
-    
+
     def empty(self):
         """Verifica se a lista está vazia"""
         if self._size == 0:
@@ -64,7 +65,7 @@ class List:
         for i in range(index, self._size-1, +1):
             self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
         self._size -= 1
-        return elem 
+        return elem
 
     def clear(self):
         """Restaura a lista para seu ponto inicial(Vazia)"""
@@ -79,7 +80,7 @@ class List:
             if self.list[i] == elem:
                 cont += 1
         return cont
-    
+
     def index(self, elem):
         """Retorna o primeiro index de um determinado elemento da lista"""
         for i in range(self._size):
@@ -121,8 +122,7 @@ class List:
 
     def __del__(self):
         """Método destrutor"""
-        print("Objeto deletado")
-        
+
     def __str__(self):
         """Representa a lista excluindo os obj NoneType"""
         tam = "\033[1;34m" + f"{self.max}" + "\033[0;0m"
@@ -131,5 +131,4 @@ class List:
         return rep
 
     def __repr__(self):
-    	return str(self)
-    	
+        return str(self)

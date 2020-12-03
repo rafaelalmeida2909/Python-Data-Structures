@@ -1,15 +1,18 @@
 class Node:
     """Representação de um nó em Python3. Com ele é possível criar uma fila encadeada"""
+
     def __init__(self, data):
-        self.data = data # Valor do nó
-        self.next = None # Próximo nó
+        self.data = data  # Valor do nó
+        self.next = None  # Próximo nó
+
 
 class LinkedQueue:
     """Representação de um estrutura de fila dinâmica encadeada em Python3 (sem prioridade)"""
+
     def __init__(self):
-        self.front = None # Define o elemento que deverá sair primeiro da fila
-        self.back = None # Define o último elemento da fila
-        self._size = 0 # Atributo privado que diz o nº de elementos na fila
+        self.front = None  # Define o elemento que deverá sair primeiro da fila
+        self.back = None  # Define o último elemento da fila
+        self._size = 0  # Atributo privado que diz o nº de elementos na fila
 
     def enqueue(self, elem):
         """Adiciona um elemento ao fim da fila"""
@@ -32,7 +35,7 @@ class LinkedQueue:
         self.front = self.front.next
         self._size -= 1
         return elem
-    
+
     def length(self):
         """Retorna a quantidade de elementos na fila"""
         return self._size
@@ -51,7 +54,6 @@ class LinkedQueue:
 
     def __del__(self):
         """Método destrutor"""
-        print("Objeto deletado")
 
     def __str__(self):
         """Método para representação da fila encadeada"""
@@ -66,5 +68,4 @@ class LinkedQueue:
         return rep
 
     def __repr__(self):
-    	return str(self)
-    	
+        return str(self)

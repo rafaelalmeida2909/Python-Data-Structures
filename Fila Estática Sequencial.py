@@ -1,11 +1,12 @@
 class Queue:
     """Representação de um estrutura de fila estática sequencial circular em Python3 (sem prioridade)"""
+
     def __init__(self, maximum):
-        self.max = maximum # Tamanho máximo da fila
-        self.queue = [None] * maximum # Fila iniciada com tamanho definido
-        self.front = 0 # Define o elemento que deverá sair primeiro da fila
-        self._size = 0 # Atributo privado que diz o nº de elementos na fila
-        self.back = 0 # Define o último elemento da fila
+        self.max = maximum  # Tamanho máximo da fila
+        self.queue = [None] * maximum  # Fila iniciada com tamanho definido
+        self.front = 0  # Define o elemento que deverá sair primeiro da fila
+        self._size = 0  # Atributo privado que diz o nº de elementos na fila
+        self.back = 0  # Define o último elemento da fila
 
     @property
     def max(self):
@@ -19,25 +20,25 @@ class Queue:
             self._max = maximum
         else:
             raise Exception("Atributo deve ser um número inteiro")
-    
+
     def enqueue(self, elem):
         """Adiciona um elemento ao fim da fila"""
-        if self._size == self.max: # Verifica se a fila está cheia
+        if self._size == self.max:  # Verifica se a fila está cheia
             raise Exception("Fila Cheia!")
         self.queue[self.back] = elem
-        self.back = (self.back + 1) % self.max # Garante uma fila circular 
+        self.back = (self.back + 1) % self.max  # Garante uma fila circular
         self._size += 1
 
     def dequeue(self):
         """Retira o primeiro elemento da fila"""
-        if self._size == 0: # Verifica se a fila está vazia
+        if self._size == 0:  # Verifica se a fila está vazia
             raise Exception("Fila Vazia!")
         elem = self.queue[self.front]
         self.queue[self.front] = None
-        self.front = (self.front + 1) % self.max # Garante uma fila circular
+        self.front = (self.front + 1) % self.max  # Garante uma fila circular
         self._size -= 1
         return elem
-    
+
     def length(self):
         """Retorna a quantidade de elementos na fila"""
         return self._size
@@ -47,7 +48,7 @@ class Queue:
         if self._size == 0:
             raise Exception("Fila vazia")
         return self.queue[self.front]
-    
+
     def empty(self):
         """Verifica se a lista está vazia"""
         if self._size == 0:
@@ -56,7 +57,6 @@ class Queue:
 
     def __del__(self):
         """Método destrutor"""
-        print("Objeto deletado")
 
     def __str__(self):
         """Representa a fila excluindo os obj NoneType"""
@@ -73,7 +73,6 @@ class Queue:
             cont += 1
         rep += "]"
         return rep
-        
+
     def __repr__(self):
-    	return str(self)
-    	
+        return str(self)

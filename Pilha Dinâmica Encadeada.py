@@ -1,14 +1,17 @@
 class Node:
     """Representação de um nó em Python3. Com ele é possível criar uma pilha encadeada"""
+
     def __init__(self, data):
-        self.data = data # Valor do nó
-        self.next = None # Próximo nó
+        self.data = data  # Valor do nó
+        self.next = None  # Próximo nó
+
 
 class LinkedStack:
     """Representação de uma pilha dinâmica encadeada em Python3"""
+
     def __init__(self):
-        self._top = None # Define o topo da pilha
-        self._size = 0 # Tamanho atual da pilha
+        self._top = None  # Define o topo da pilha
+        self._size = 0  # Tamanho atual da pilha
 
     def push(self, elem):
         """Insere um elemento no topo da pilha"""
@@ -16,9 +19,9 @@ class LinkedStack:
             self._top = Node(elem)
         else:
             aux = self._top
-            self._top = Node(elem) 
+            self._top = Node(elem)
             self._top.next = aux
-        self._size += 1   
+        self._size += 1
 
     def pop(self):
         """Deleta um item do topo da pilha e retorna o seu valor"""
@@ -39,14 +42,13 @@ class LinkedStack:
         if self._size == 0:
             return True
         return False
-    
+
     def length(self):
         """Retorna o tamanho da pilha"""
         return self._size
 
     def __del__(self):
         """Método destrutor"""
-        print("Objeto deletado")
 
     def __str__(self):
         """Representa a pilha excluindo os obj NoneType"""
@@ -64,5 +66,4 @@ class LinkedStack:
         return rep
 
     def __repr__(self):
-    	return str(self)
-    	
+        return str(self)

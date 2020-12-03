@@ -1,16 +1,19 @@
 class Node:
     """Representação de um nó em Python3. Com ele é possível criar uma lista duplamente encadeada"""
+
     def __init__(self, data):
-        self.data = data # Valor do nó
-        self.next = None # Próximo nó
-        self.prev = None # Nó anterior
+        self.data = data  # Valor do nó
+        self.next = None  # Próximo nó
+        self.prev = None  # Nó anterior
+
 
 class DoublyLinkedList:
     """Representação de uma lista dinâmica duplamente encadeada em Python3, onde cada elemento, é uma instância da classe nó"""
+
     def __init__(self):
-        self.first = None # Primeiro elemento da lista 
-        self.last = None # Ultimo elemento da lista 
-        self._size = 0 # Define o nº de elementos na lista
+        self.first = None  # Primeiro elemento da lista
+        self.last = None  # Ultimo elemento da lista
+        self._size = 0  # Define o nº de elementos na lista
 
     def getItemByIndex(self, index):
         """Método auxiliar que encontra o nó a partir do índice"""
@@ -27,7 +30,7 @@ class DoublyLinkedList:
     def append(self, elem):
         """Adiciona um novo nó ao final da lista"""
         node = Node(elem)
-        if self.first: # Se não for None
+        if self.first:  # Se não for None
             self.last.next = node
             node.prev = self.last
             node.next = None
@@ -57,7 +60,7 @@ class DoublyLinkedList:
         elif index == 0:
             node.next = self.first
             self.first.prev = node
-            self.first = node 
+            self.first = node
             self._size += 1
         elif index > 0:
             node_next = self.getItemByIndex(index)
@@ -69,7 +72,7 @@ class DoublyLinkedList:
             self._size += 1
         else:
             raise IndexError("Indíce inválido")
-    
+
     def pop(self, index=None):
         """Deleta o último item da lista e retorna o seu valor"""
         if self._size == 0:
@@ -164,21 +167,28 @@ class DoublyLinkedList:
 
     def __del__(self):
         """Método destrutor"""
-        print("Objeto deletado")
 
     def __str__(self):
         """Método para representação da lista encadeada"""
-        rep = "\033[1;31m" + "head" + "\033[0;0m" + " -> "
+        rep = "\033[1;34mNone\033[0;0m" + " <- {} " + "\033[1;34mNone\033[0;0m"
         pointer = self.first
+        aux = ""
         while(pointer != None):
-            if pointer.next is None:
-                rep += f"{pointer.data} -> "
+            if pointer == self.first and pointer.next is None:
+                aux += "\033[1;31m" + str(pointer.data) + "\033[0;0m" + " -> "
                 break
-            rep += f"{pointer.data} <-> "
-            pointer = pointer.next
-        rep += "\033[1;34m" + "None" + "\033[0;0m"
+            elif pointer.next is None:
+                aux += f"{pointer.data} -> "
+                break
+            else:
+                if self.first == pointer:
+                    aux += "\033[1;31m" + \
+                        str(pointer.data) + "\033[0;0m" + " <-> "
+                else:
+                    aux += f"{pointer.data} <-> "
+                pointer = pointer.next
+        rep = rep.format(aux)
         return rep
 
     def __repr__(self):
-    	return str(self)
-    	
+        return str(self)
