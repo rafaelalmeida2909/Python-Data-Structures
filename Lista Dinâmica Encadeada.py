@@ -23,6 +23,16 @@ class LinkedList:
                 raise IndexError("Índice fora do intervalo")
         return pointer
 
+    def processIndex(self, index):
+        """Método auxiliar que garante o funcionamento dos métodos com índice negativo"""
+        if index is None:
+            index = self._size - 1
+        elif index == self._size or abs(index) > self._size:
+            raise IndexError("Índice inválido")
+        if index < 0:
+            index = self._size + index
+        return index
+
     def append(self, elem):
         """Adiciona um novo nó ao final da lista"""
         if self.first:  # Se não for None
@@ -55,6 +65,10 @@ class LinkedList:
 
     def insert(self, index, elem):
         """Insere um novo nó a partir de um índice"""
+        if index < 0 and abs(index) > self._size:
+            index = 0
+        elif index < 0:
+            index = self._size + index
         if index == 0:
             pointer = self.getItemByIndex(index)
             aux = Node(elem)
@@ -68,12 +82,11 @@ class LinkedList:
         else:
             self.append(elem)
 
-    def pop(self, index):
+    def pop(self, index=None):
         """Deleta um item da lista, baseado em seu índice e retorna o seu valor"""
         if self._size == 0:
             raise Exception("Lista vazia")
-        if index >= self._size:
-            raise IndexError("Índice fora do intervalo")
+        index = self.processIndex(index)
         if index == 0:
             elem = self.first.data
             self.first = self.first.next
@@ -112,22 +125,41 @@ class LinkedList:
                 cont += 1
         raise ValueError(f"{elem} não está na lista")
 
+    def reverse(self):
+        """Inverte lista original"""
+        if self._size == 0:
+            raise IndexError("Lista vazia")
+        for i in range(self._size-1, -1, -1):
+            self.append(self.pop(i))
+
+    def createReverse(self):
+        """Cria lista invertida em novo objeto"""
+        if self._size == 0:
+            raise IndexError("Lista vazia")
+        new = LinkedList()
+        for i in range(self._size-1, -1, -1):
+            new.append(self[i])
+        return new
+
     def __len__(self):
         """Retorna o tamanho da lista"""
         return self._size
 
     def __getitem__(self, index):
         """Retorna o valor de um nó da lista a partir de um índice"""
+        index = self.processIndex(index)
         pointer = self.getItemByIndex(index)
         return pointer.data
 
     def __setitem__(self, index, elem):
         """Atribui um novo valor a um nó a partir de um índice"""
+        index = self.processIndex(index)
         pointer = self.getItemByIndex(index)
         pointer.data = elem
 
     def __delitem__(self, index):
         """Remove um nó da lista a partir de um índice"""
+        index = self.processIndex(index)
         if index == 0:
             pointer = self.getItemByIndex(index)
             self.first = pointer.next

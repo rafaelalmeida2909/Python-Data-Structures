@@ -27,6 +27,16 @@ class DoublyLinkedList:
                 raise IndexError("Índice fora do intervalo")
         return pointer
 
+    def processIndex(self, index):
+        """Método auxiliar que garante o funcionamento dos métodos com índice negativo"""
+        if index is None:
+            index = self._size - 1
+        elif index == self._size or abs(index) > self._size:
+            raise IndexError("Índice inválido")
+        if index < 0:
+            index = self._size + index
+        return index
+
     def append(self, elem):
         """Adiciona um novo nó ao final da lista"""
         node = Node(elem)
@@ -55,6 +65,10 @@ class DoublyLinkedList:
     def insert(self, index, elem):
         """Insere um novo nó a partir de um índice"""
         node = Node(elem)
+        if index < 0 and abs(index) > self._size:
+            index = 0
+        elif index < 0:
+            index = self._size + index
         if self._size == 0 or index >= self._size:
             self.append(elem)
         elif index == 0:
@@ -77,10 +91,7 @@ class DoublyLinkedList:
         """Deleta o último item da lista e retorna o seu valor"""
         if self._size == 0:
             raise Exception("Lista vazia")
-        if index is None:
-            index = self._size-1
-        if index == self._size or abs(index) > self._size:
-            raise IndexError("Índice inválido")
+        index = self.processIndex(index)
         if self._size == 1:
             elem = self.last.data
             self.clear()
@@ -118,7 +129,19 @@ class DoublyLinkedList:
         raise ValueError(f"{elem} não está na lista")
 
     def reverse(self):
-        """Retorna a lista invertida na forma de um novo objeto"""
+        """Inverte lista original"""
+        if self._size == 0:
+            raise IndexError("Lista vazia")
+        pointer = self.first
+        while(pointer):
+            pointer.next, pointer.prev = pointer.prev, pointer.next
+            pointer = pointer.prev
+        self.first, self.last = self.last, self.first
+
+    def createReverse(self):
+        """Cria lista invertida em novo objeto"""
+        if self._size == 0:
+            raise IndexError("Lista vazia")
         new = DoublyLinkedList()
         pointer = self.last
         while(pointer):
@@ -132,26 +155,25 @@ class DoublyLinkedList:
 
     def __getitem__(self, index):
         """Retorna o valor de um nó da lista a partir de um índice"""
-        if index == self._size or abs(index) > self._size:
-            raise IndexError("Índice inválido")
+        if self._size == 0:
+            raise IndexError("Lista vazia")
+        index = self.processIndex(index)
         pointer = self.getItemByIndex(index)
         return pointer.data
 
     def __setitem__(self, index, elem):
         """Atribui um novo valor a um nó a partir de um índice"""
-        if index == self._size or abs(index) > self._size:
-            raise IndexError("Índice inválido")
-        if index < 0:
-            index = self._size + index
+        if self._size == 0:
+            raise IndexError("Lista vazia")
+        index = self.processIndex(index)
         pointer = self.getItemByIndex(index)
         pointer.data = elem
 
-    def __delitem__(self, index):
+    def __delitem__(self, index): # testar indice negativo
         """Remove um nó da lista a partir de um índice"""
-        if index == self._size or abs(index) > self._size:
-            raise IndexError("Índice inválido")
-        if index < 0:
-            index = self._size + index
+        if self._size == 0:
+            raise IndexError("Lista vazia")
+        index = self.processIndex(index)
         if index == 0:
             self.first = self.first.next
             self.first.prev = None

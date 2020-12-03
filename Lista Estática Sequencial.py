@@ -18,6 +18,16 @@ class List:
             self._max = maximum
         else:
             raise Exception("Atributo deve ser um número inteiro")
+    
+    def processIndex(self, index):
+        """Método auxiliar que garante o funcionamento dos métodos com índice negativo"""
+        if index is None:
+            index = self._size - 1
+        elif index == self._size or abs(index) > self._size:
+            raise IndexError("Índice inválido")
+        if index < 0:
+            index = self._size + index
+        return index
 
     def append(self, elem):
         """Adiciona um elemento ao final da lista"""
@@ -47,6 +57,10 @@ class List:
         """Inserte um elemento em uma posição qualquer da lista"""
         if self.max == self._size:
             raise "Lista Cheia"
+        if index < 0 and abs(index) >= self._size:
+            index = 0
+        elif index < 0:
+            index = self._size + index
         if index >= self._size:
             self.append(elem)
             return
@@ -55,12 +69,11 @@ class List:
         self.list[index] = elem
         self._size += 1
 
-    def pop(self, index):
+    def pop(self, index=None):
         """Deleta um item da lista, baseado em seu índice e retorna o seu valor"""
-        if index >= self._size:
-            raise IndexError("Index fora do intervalo da lista")
         if self._size == 0:
             raise IndexError("Lista vazia")
+        index = self.processIndex(index)
         elem, self.list[index] = self.list[index], None
         for i in range(index, self._size-1, +1):
             self.list[i], self.list[i+1] = self.list[i+1], self.list[i]
@@ -88,26 +101,37 @@ class List:
                 return i
         raise ValueError(f"{elem} não está na lista.")
 
+    def reverse(self):
+        """Inverte lista original"""
+        if self._size == 0:
+            raise IndexError("Lista vazia")
+        final = self._size - 1
+        for i in range((self._size//2)):
+            self.list[i], self.list[final] = self.list[final], self.list[i]
+            final -= 1
+
+    def createReverse(self):
+        """Cria lista invertida em novo objeto"""
+        if self._size == 0:
+            raise IndexError("Lista vazia")
+        new = List(self.max)
+        for i in range(self._size-1, -1, -1):
+            new.append(self.list[i])
+        return new
+
     def __len__(self):
         """Retorna a quantidade de elementos da lista"""
         return self._size
 
     def __getitem__(self, index):
         """Retorna o valor de uma posição da lista"""
-        if index >= self._size or abs(index) > self._size:
-            raise IndexError("Índice fora do intervalo da lista")
-        if index < 0:
-            return self.list[self._size+index]
+        index = self.processIndex(index)
         return self.list[index]
 
     def __setitem__(self, index, elem):
         """Atribuição de valor a uma posição qualquer da lista"""
-        if index >= self._size or abs(index) > self._size:
-            raise IndexError("Atribuição fora do intervalo da lista")
-        if index < 0:
-            self.list[self._size+index] = elem
-        else:
-            self.list[index] = elem
+        index = self.processIndex(index)
+        self.list[index] = elem
 
     def __delitem__(self, index):
         """Deleta um item da lista, baseado em seu índice"""
