@@ -2,7 +2,7 @@
 
 A repository of the most importants data structures, developed in Python3.
 
-## Structes avaliable:
+## Structes available:
 
 * List
 * Linked List
