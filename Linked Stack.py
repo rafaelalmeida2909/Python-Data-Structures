@@ -1,20 +1,20 @@
 class Node:
-    """Representação de um nó em Python3. Com ele é possível criar uma pilha encadeada"""
+    """Class to represent a node in Python3"""
 
     def __init__(self, data):
-        self.data = data  # Valor do nó
-        self.next = None  # Próximo nó
+        self.data = data  # Node value
+        self.next = None  # Next node
 
 
 class LinkedStack:
-    """Representação de uma pilha dinâmica encadeada em Python3"""
+    """Class to represent a linked stack in Python3"""
 
     def __init__(self):
-        self._top = None  # Define o topo da pilha
-        self._size = 0  # Tamanho atual da pilha
+        self._top = None  # Top of stack
+        self._size = 0  # The stack size
 
     def push(self, elem):
-        """Insere um elemento no topo da pilha"""
+        """Adds an element at the top of a stack"""
         if self._size == 0:
             self._top = Node(elem)
         else:
@@ -24,35 +24,35 @@ class LinkedStack:
         self._size += 1
 
     def pop(self):
-        """Deleta um item do topo da pilha e retorna o seu valor"""
+        """Removes the topmost element of a stack"""
         if self._size == 0:
-            raise Exception("Pilha vazia")
+            raise Exception("Empty stack")
         elem, self._top = self._top.data, self._top.next
         self._size -= 1
         return elem
 
     def top(self):
-        """retorna o elemento no topo da pilha"""
+        """Returns the element on the top of the stack but does not remove it"""
         if self._size == 0:
-            raise Exception("Pilha vazia")
+            raise Exception("Empty stack")
         return self._top.data
 
     def empty(self):
-        """Verifica se a pilha está vazia"""
+        """Returns true if the stack is empty, otherwise, it returns false"""
         if self._size == 0:
             return True
         return False
 
     def length(self):
-        """Retorna o tamanho da pilha"""
+        """Returns the size of stack"""
         return self._size
 
     def __del__(self):
-        """Método destrutor invocado sempre que o código é finalizado"""
+        """Destructor method"""
 
     def __str__(self):
-        """Representa a pilha excluindo os obj NoneType"""
-        rep = "\033[1;34m" + "topo -> " + "\033[0;0m"
+        """Method for representing the stack, excluding NoneType objects (user)"""
+        rep = "\033[1;34m" + "top ->  " + "\033[0;0m"
         if self._size == 0:
             rep += "None"
             return rep
@@ -66,4 +66,5 @@ class LinkedStack:
         return rep
 
     def __repr__(self):
+        """Method for representing the stack, excluding NoneType objects (developer)"""
         return str(self)
