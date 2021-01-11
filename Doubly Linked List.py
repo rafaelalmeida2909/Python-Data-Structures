@@ -1,69 +1,69 @@
 class Node:
-    """Representação de um nó em Python3. Com ele é possível criar uma lista duplamente encadeada"""
+    """Class to represent a node in Python3"""
 
     def __init__(self, data):
-        self.data = data  # Valor do nó
-        self.next = None  # Próximo nó
-        self.prev = None  # Nó anterior
+        self.data = data  # Node value
+        self.next = None  # Next node
+        self.prev = None  # Previus node
 
 
 class DoublyLinkedList:
-    """Representação de uma lista dinâmica duplamente encadeada em Python3, onde cada elemento, é uma instância da classe nó"""
+    """Class to represent a doubly linked list in Python3"""
 
     def __init__(self):
-        self.first = None  # Primeiro elemento da lista
-        self.last = None  # Ultimo elemento da lista
-        self._size = 0  # Define o nº de elementos na lista
+        self._first = None  # First element of list
+        self._last = None  # Last element of list
+        self._size = 0  # The size of list
 
     def getItemByIndex(self, index):
-        """Método auxiliar que encontra o nó a partir do índice"""
+        """Auxiliary method that returns the node by the index"""
         if index < 0:
             index = self._size + index
-        pointer = self.first
+        pointer = self._first
         for _ in range(index):
             if pointer.next:
                 pointer = pointer.next
             else:
-                raise IndexError("Índice fora do intervalo")
+                raise IndexError("Index out of range")
         return pointer
 
     def processIndex(self, index):
-        """Método auxiliar que garante o funcionamento dos métodos com índice negativo"""
+        """Auxiliary method that helps with negative indexs"""
         if index is None:
             index = self._size - 1
         elif index == self._size or abs(index) > self._size:
-            raise IndexError("Índice inválido")
+            raise IndexError("Index out of range")
         if index < 0:
             index = self._size + index
         return index
 
     def append(self, elem):
-        """Adiciona um novo nó ao final da lista"""
+        """Append a new element in the end of list"""
         node = Node(elem)
-        if self.first:  # Se não for None
-            self.last.next = node
-            node.prev = self.last
+        if self._first:  # if is not None
+            self._last.next = node
+            node.prev = self._last
             node.next = None
-            self.last = node
+            self._last = node
         else:
-            self.first = self.last = node
+            self._first = self._last = node
         self._size += 1
 
     def remove(self, elem):
-        """Deleta a primeira aparição de um elemento na lista"""
+        """Removes the first occurrence of the element from the list"""
         if self._size == 0:
-            raise Exception("Lista Vazia")
+            raise Exception("Empty list")
         index = self.index(elem)
         del self[index]
 
     def empty(self):
-        """Verifica se a lista está vazia"""
+        """Returns true if the stack is empty, otherwise, it returns false"""
         if self._size == 0:
             return True
         return False
 
     def insert(self, index, elem):
-        """Insere um novo nó a partir de um índice"""
+        """Inserts a new element by index"""
         node = Node(elem)
         if index < 0 and abs(index) > self._size:
             index = 0
@@ -72,9 +72,9 @@ class DoublyLinkedList:
         if self._size == 0 or index >= self._size:
             self.append(elem)
         elif index == 0:
-            node.next = self.first
-            self.first.prev = node
-            self.first = node
+            node.next = self._first
+            self._first.prev = node
+            self._first = node
             self._size += 1
         elif index > 0:
             node_next = self.getItemByIndex(index)
@@ -85,15 +85,15 @@ class DoublyLinkedList:
             node_prev.next = node
             self._size += 1
         else:
-            raise IndexError("Indíce inválido")
+            raise IndexError("Index out of range")
 
     def pop(self, index=None):
-        """Deleta o último item da lista e retorna o seu valor"""
+        """Removes and returns the last element from the list"""
         if self._size == 0:
-            raise Exception("Lista vazia")
+            raise Exception("Empty list")
         index = self.processIndex(index)
         if self._size == 1:
-            elem = self.last.data
+            elem = self._last.data
             self.clear()
         else:
             elem = self.getItemByIndex(index).data
@@ -101,14 +101,14 @@ class DoublyLinkedList:
         return elem
 
     def clear(self):
-        """Restaura a lista para seu ponto inicial(Vazia)"""
-        self.first = None
-        self.last = None
+        """Restores the list to its starting point (Empty)"""
+        self._first = None
+        self._last = None
         self._size = 0
 
     def count(self, elem):
-        """Conta o número de aparições de um determinado elemento na lista"""
-        pointer = self.first
+        """Returns the number of elements with the specified value"""
+        pointer = self._first
         cont = 0
         while(pointer != None):
             if pointer.data == elem:
@@ -117,8 +117,8 @@ class DoublyLinkedList:
         return cont
 
     def index(self, elem):
-        """Retorna o índice da primeira aparição de um elemento na lista"""
-        pointer = self.first
+        """Returns the index of specified element"""
+        pointer = self._first
         cont = 0
         while(pointer):
             if pointer.data == elem:
@@ -126,60 +126,60 @@ class DoublyLinkedList:
             else:
                 pointer = pointer.next
                 cont += 1
-        raise ValueError(f"{elem} não está na lista")
+        raise ValueError(f"{elem} not in list")
 
     def reverse(self):
-        """Inverte lista original"""
+        """Reverses the original list"""
         if self._size == 0:
-            raise IndexError("Lista vazia")
-        pointer = self.first
+            raise IndexError("Empty list")
+        pointer = self._first
         while(pointer):
             pointer.next, pointer.prev = pointer.prev, pointer.next
             pointer = pointer.prev
-        self.first, self.last = self.last, self.first
+        self._first, self._last = self._last, self._first
 
-    def createReverse(self):
-        """Cria lista invertida em novo objeto"""
+    def createReversed(self):
+        """Creates and returns a reversed new list"""
         if self._size == 0:
-            raise IndexError("Lista vazia")
+            raise IndexError("Empty list")
         new = DoublyLinkedList()
-        pointer = self.last
+        pointer = self._last
         while(pointer):
             new.append(pointer.data)
             pointer = pointer.prev
         return new
 
     def __len__(self):
-        """Retorna o tamanho da lista"""
+        """Returns the size of list; Ex: len(obj)"""
         return self._size
 
     def __getitem__(self, index):
-        """Retorna o valor de um nó da lista a partir de um índice"""
+        """Returns an element that corresponding to the index; Ex: obj[index]"""
         if self._size == 0:
-            raise IndexError("Lista vazia")
+            raise IndexError("Empty list")
         index = self.processIndex(index)
         pointer = self.getItemByIndex(index)
         return pointer.data
 
     def __setitem__(self, index, elem):
-        """Atribui um novo valor a um nó a partir de um índice"""
+        """Sets the value by the index; Ex: obj[index] = value"""
         if self._size == 0:
-            raise IndexError("Lista vazia")
+            raise IndexError("Empty list")
         index = self.processIndex(index)
         pointer = self.getItemByIndex(index)
         pointer.data = elem
 
     def __delitem__(self, index):
-        """Remove um nó da lista a partir de um índice"""
+        """Removes an element that corresponding to the index; Ex: obj[index]"""
         if self._size == 0:
-            raise IndexError("Lista vazia")
+            raise IndexError("Empty list")
         index = self.processIndex(index)
         if index == 0:
-            self.first = self.first.next
-            self.first.prev = None
+            self._first = self._first.next
+            self._first.prev = None
         elif index == self._size-1:
-            self.last = self.last.prev
-            self.last.next = None
+            self._last = self._last.prev
+            self._last.next = None
         else:
             node_next = self.getItemByIndex(index+1)
             node_prev = self.getItemByIndex(index-1)
@@ -188,22 +188,24 @@ class DoublyLinkedList:
         self._size -= 1
 
     def __del__(self):
-        """Método destrutor invocado sempre que o código é finalizado"""
+        """Destructor method"""
 
     def __str__(self):
-        """Método para representação da lista encadeada"""
+        """Method to represent a doubly linked list (user)"""
+        if self._size == 0:
+            return "\033[1;34mNone\033[0;0m" + " <-> " + "\033[1;34mNone\033[0;0m"
         rep = "\033[1;34mNone\033[0;0m" + " <- {} " + "\033[1;34mNone\033[0;0m"
-        pointer = self.first
+        pointer = self._first
         aux = ""
         while(pointer != None):
-            if pointer == self.first and pointer.next is None:
+            if pointer == self._first and pointer.next is None:
                 aux += "\033[1;31m" + str(pointer.data) + "\033[0;0m" + " -> "
                 break
             elif pointer.next is None:
                 aux += f"{pointer.data} -> "
                 break
             else:
-                if self.first == pointer:
+                if self._first == pointer:
                     aux += "\033[1;31m" + \
                         str(pointer.data) + "\033[0;0m" + " <-> "
                 else:
@@ -213,4 +215,5 @@ class DoublyLinkedList:
         return rep
 
     def __repr__(self):
+        """Method to represent a doubly linked list (developer)"""
         return str(self)
