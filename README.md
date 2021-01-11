@@ -11,10 +11,10 @@ A repository of the most importants data structures, developed in Python3.
 * Linked Queue
 * Stack
 * Linked Stack
+* Hash Table
   
 ## Will be done:
 
-* Hashing
 * Trees
 
 ## Contributing
