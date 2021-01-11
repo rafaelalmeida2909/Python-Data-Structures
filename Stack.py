@@ -1,74 +1,75 @@
 class Stack:
-    """Representação de uma Pilha estática sequencial em Python3"""
+    """Class to represent a sequential static stack in Python3"""
 
     def __init__(self, maximum):
-        self.max = maximum  # Define tamanho reservado para pilha
-        self.stack = [None] * maximum  # Pilha iniciada com tamanho definido
-        self._size = 0  # Tamanho atual da pilha
+        self.max = maximum  # The maximum stack size
+        self._stack = [None] * maximum  # Empty stack
+        self._size = 0  # The size of stack
 
     @property
     def max(self):
-        """Retorna o valor do atributo max"""
+        """Getters to max stack size"""
         return self._max
 
     @max.setter
     def max(self, maximum):
-        """Garante que max tenha um valor inteiro"""
+        """Setters to max stack size"""
         if isinstance(maximum, int):
             self._max = maximum
         else:
-            raise Exception("Atributo deve ser um número inteiro")
+            raise Exception("The type must be an integer")
 
     def push(self, elem):
-        """Insere um elemento no topo da pilha"""
+        """Adds an element at the top of a stack"""
         if self._size == self.max:
-            raise Exception("Pilha cheia")
-        self.stack[self._size] = elem
+            raise Exception("Full stack")
+        self._stack[self._size] = elem
         self._size += 1
 
     def pop(self):
-        """Deleta um item do topo da pilha e retorna o seu valor"""
+        """Removes the topmost element of a stack"""
         if self._size == 0:
-            raise Exception("Pilha vazia")
-        elem, self.stack[self._size-1] = self.stack[self._size-1], None
+            raise Exception("Empty stack")
+        elem, self._stack[self._size-1] = self._stack[self._size-1], None
         self._size -= 1
         return elem
 
     def top(self):
-        """retorna o elemento no topo da pilha"""
+        """Returns the element on the top of the stack but does not remove it"""
         if self._size == 0:
-            raise Exception("Pilha vazia")
-        return self.stack[self._size-1]
+            raise Exception("Empty stack")
+        return self._stack[self._size-1]
 
     def empty(self):
-        """Verifica se a pilha está vazia"""
+        """Returns true if the stack is empty, otherwise, it returns false"""
         if self._size == 0:
             return True
         return False
 
     def length(self):
-        """Retorna o tamanho da pilha"""
+        """Returns the size of stack"""
         return self._size
 
     def __del__(self):
-        """Método destrutor"""
+        """Destructor method"""
 
     def __str__(self):
-        """Representa a pilha excluindo os obj NoneType"""
-        rep = "\033[1;34m" + "topo -> " + "\033[0;0m"
+        """Method for representing the stack, excluding NoneType objects (user)"""
+        rep = "\033[1;34m" + "top ->  " + "\033[0;0m"
         if self._size == 0:
             rep += "None"
             return rep
         for i in range(self._size-1, -1, -1):
-            if self.stack[i] == None:
+            if self._stack[i] == None:
                 pass
             elif i == self._size-1:
-                rep += f"{str(self.stack[i]).rjust(2)}"
+                rep += f"{str(self._stack[i]).rjust(2)}"
             elif i == 0:
-                rep += f"\n{str(self.stack[i]).rjust(10)}"
+                rep += f"\n{str(self._stack[i]).rjust(10)}"
             else:
-                rep += f"\n{str(self.stack[i]).rjust(10)}"
+                rep += f"\n{str(self._stack[i]).rjust(10)}"
         return rep
 
     def __repr__(self):
+        """Method for representing the stack, excluding NoneType objects (developer)"""
         return str(self)
