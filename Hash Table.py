@@ -1,4 +1,4 @@
-class Position():
+class Position:
     """Class to represent a hash table position in Python3"""
 
     def __init__(self, key):
@@ -10,7 +10,7 @@ class Position():
         return str(self.key)
 
 
-class HashTable():
+class HashTable:
     """Class to represent a hash table in Python3"""
 
     def __init__(self, maximum=101):  # To a better experience, use a prime number
