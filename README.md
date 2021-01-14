@@ -12,10 +12,11 @@ A repository of the most importants data structures, developed in Python3.
 * Stack
 * Linked Stack
 * Hash Table
+* Binary Tree
   
 ## Will be done:
 
-* Trees
+* AVL tree
 
 ## Contributing
 
