@@ -53,7 +53,7 @@ class LinkedQueue:
         return self._back.data
 
     def empty(self):
-        """Verifys if the queue is empty"""
+        """Returns true if the queue is empty, otherwise, it returns false"""
         if self._size == 0:
             return True
         return False
