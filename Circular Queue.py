@@ -22,7 +22,7 @@ class Queue:
             raise Exception("Atributo deve ser um número inteiro")
 
     def enqueue(self, elem):
-        """Append a new element in the end of queue"""
+        """Appends a new element in the end of queue"""
         if self._size == self.max:  # Verifys if the queue is full
             raise Exception("Full queue!")
         self._queue[self._back] = elem

@@ -30,7 +30,7 @@ class List:
         return index
 
     def append(self, elem):
-        """Append a new element in the end of list"""
+        """Appends a new element in the end of list"""
         if self._max == self._size:
             raise Exception("Full list")
         self._list[self._size] = elem

@@ -15,7 +15,7 @@ class LinkedQueue:
         self._size = 0  # The size of queue
 
     def enqueue(self, elem):
-        """Insert an element at the end of the queue"""
+        """Inserts an element at the end of the queue"""
         if self._size == 0:
             aux = Node(elem)
             self._front = aux

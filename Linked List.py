@@ -34,7 +34,7 @@ class LinkedList:
         return index
 
     def append(self, elem):
-        """Append a new element in the end of list"""
+        """Appends a new element in the end of list"""
         if self._first:  # if is not None
             pointer = self._first
             while(pointer.next):

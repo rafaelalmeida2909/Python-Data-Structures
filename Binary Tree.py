@@ -57,7 +57,7 @@ class BinaryTree:
                 self._nodes += 1
 
     def remove(self, value):
-        """Remove a node and regroup the tree"""
+        """Removes a node and regroup the tree"""
         prev = None
         current = self._root
         while current != None:

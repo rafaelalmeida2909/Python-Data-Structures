@@ -38,7 +38,7 @@ class DoublyLinkedList:
         return index
 
     def append(self, elem):
-        """Append a new element in the end of list"""
+        """Appends a new element in the end of list"""
         node = Node(elem)
         if self._first:  # if is not None
             self._last.next = node
