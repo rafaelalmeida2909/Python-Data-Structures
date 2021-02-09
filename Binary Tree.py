@@ -90,17 +90,17 @@ class BinaryTree:
         if self._root is None:
             raise Exception("The tree is empty")
         if node != None:
-            self.preOrder(node.left)
+            self.order(node.left)
             print(node.data)
-            self.preOrder(node.right)
+            self.order(node.right)
 
     def postOrder(self, node):
         """Prints the tree: left node -> right node -> root"""
         if self._root is None:
             raise Exception("The tree is empty")
         if node != None:
-            self.preOrder(node.left)
-            self.preOrder(node.right)
+            self.postOrder(node.left)
+            self.postOrder(node.right)
             print(node.data)
 
     def search(self, value):
