@@ -11,7 +11,7 @@ class BinaryTree:
     """Class to represent a binary tree in Python3"""
 
     def __init__(self):
-        self._root = None  # The Tree's root
+        self._root = None  # The root of tree
         self._nodes = 0  # Number of nodes
 
     def returnNode(self, current):
@@ -172,3 +172,55 @@ class BinaryTree:
         if self._root is None:
             return True
         return False
+    
+    def printTree(self, node=None):
+        """Prints the Avl Tree"""
+        if node is None:
+            node = self._root
+        lines, *_ = self._printTree(node)
+        for line in lines:
+            print(line)
+
+    def _printTree(self, node):
+        """Auxiliary function to print the Avl Tree"""
+        if node.right is None and node.left is None:  # No child
+            line = '%s' % node.data
+            width = len(line)
+            height = 1
+            middle = width // 2
+            return [line], width, height, middle
+
+        if node.right is None:  # Only left child
+            lines, n, p, x = self._printTree(node.left)
+            s = '%s' % node.data
+            u = len(s)
+            first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s
+            second_line = x * ' ' + '/' + (n - x - 1 + u) * ' '
+            shifted_lines = [line + u * ' ' for line in lines]
+            return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
+
+        if node.left is None:  # Only right child
+            lines, n, p, x = self._printTree(node.right)
+            s = '%s' % node.data
+            u = len(s)
+            first_line = s + x * '_' + (n - x) * ' '
+            second_line = (u + x) * ' ' + '\\' + (n - x - 1) * ' '
+            shifted_lines = [u * ' ' + line for line in lines]
+            return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
+
+        left, n, p, x = self._printTree(node.left)  # Two children
+        right, m, q, y = self._printTree(node.right)
+        s = '%s' % node.data
+        u = len(s)
+        first_line = (x + 1) * ' ' + (n - x - 1) * \
+            '_' + s + y * '_' + (m - y) * ' '
+        second_line = x * ' ' + '/' + \
+            (n - x - 1 + u + y) * ' ' + '\\' + (m - y - 1) * ' '
+        if p < q:
+            left += [n * ' '] * (q - p)
+        elif q < p:
+            right += [m * ' '] * (p - q)
+        zipped_lines = zip(left, right)
+        lines = [first_line, second_line] + \
+            [a + u * ' ' + b for a, b in zipped_lines]
+        return lines, n + m + u, max(p, q) + 2, n + u // 2
