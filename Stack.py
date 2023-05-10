@@ -30,7 +30,7 @@ class Stack:
         """Removes the topmost element of a stack"""
         if self._size == 0:
             raise Exception("Empty stack")
-        elem, self._stack[self._size-1] = self._stack[self._size-1], None
+        elem, self._stack[self._size - 1] = self._stack[self._size - 1], None
         self._size -= 1
         return elem
 
@@ -38,7 +38,7 @@ class Stack:
         """Returns the element on the top of the stack but does not remove it"""
         if self._size == 0:
             raise Exception("Empty stack")
-        return self._stack[self._size-1]
+        return self._stack[self._size - 1]
 
     def empty(self):
         """Returns true if the stack is empty, otherwise, it returns false"""
@@ -59,10 +59,10 @@ class Stack:
         if self._size == 0:
             rep += "None"
             return rep
-        for i in range(self._size-1, -1, -1):
+        for i in range(self._size - 1, -1, -1):
             if self._stack[i] == None:
                 pass
-            elif i == self._size-1:
+            elif i == self._size - 1:
                 rep += f"{str(self._stack[i]).rjust(2)}"
             elif i == 0:
                 rep += f"\n{str(self._stack[i]).rjust(10)}"

@@ -13,10 +13,14 @@ A repository of the most importants data structures, developed in Python3.
 * Linked Stack
 * Hash Table
 * Binary Tree
+* AVL Tree
+* Splay Tree
   
 ## Will be done:
+* Red-black Tree
+* Trie
+* Patricia Tree
 
-* AVL tree
 
 ## Contributing
 

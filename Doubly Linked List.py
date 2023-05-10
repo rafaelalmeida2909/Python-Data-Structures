@@ -78,7 +78,7 @@ class DoublyLinkedList:
             self._size += 1
         elif index > 0:
             node_next = self.getItemByIndex(index)
-            node_prev = self.getItemByIndex(index-1)
+            node_prev = self.getItemByIndex(index - 1)
             node.next = node_next
             node.prev = node_prev
             node_next.prev = node
@@ -110,7 +110,7 @@ class DoublyLinkedList:
         """Returns the number of elements with the specified value"""
         pointer = self._first
         cont = 0
-        while(pointer != None):
+        while pointer != None:
             if pointer.data == elem:
                 cont += 1
             pointer = pointer.next
@@ -120,7 +120,7 @@ class DoublyLinkedList:
         """Returns the index of specified element"""
         pointer = self._first
         cont = 0
-        while(pointer):
+        while pointer:
             if pointer.data == elem:
                 return cont
             else:
@@ -133,7 +133,7 @@ class DoublyLinkedList:
         if self._size == 0:
             raise IndexError("Empty list")
         pointer = self._first
-        while(pointer):
+        while pointer:
             pointer.next, pointer.prev = pointer.prev, pointer.next
             pointer = pointer.prev
         self._first, self._last = self._last, self._first
@@ -144,7 +144,7 @@ class DoublyLinkedList:
             raise IndexError("Empty list")
         new = DoublyLinkedList()
         pointer = self._last
-        while(pointer):
+        while pointer:
             new.append(pointer.data)
             pointer = pointer.prev
         return new
@@ -177,12 +177,12 @@ class DoublyLinkedList:
         if index == 0:
             self._first = self._first.next
             self._first.prev = None
-        elif index == self._size-1:
+        elif index == self._size - 1:
             self._last = self._last.prev
             self._last.next = None
         else:
-            node_next = self.getItemByIndex(index+1)
-            node_prev = self.getItemByIndex(index-1)
+            node_next = self.getItemByIndex(index + 1)
+            node_prev = self.getItemByIndex(index - 1)
             node_next.prev = node_prev
             node_prev.next = node_next
         self._size -= 1
@@ -197,7 +197,7 @@ class DoublyLinkedList:
         rep = "\033[1;34mNone\033[0;0m" + " <- {} " + "\033[1;34mNone\033[0;0m"
         pointer = self._first
         aux = ""
-        while(pointer != None):
+        while pointer != None:
             if pointer == self._first and pointer.next is None:
                 aux += "\033[1;31m" + str(pointer.data) + "\033[0;0m" + " -> "
                 break
@@ -206,8 +206,7 @@ class DoublyLinkedList:
                 break
             else:
                 if self._first == pointer:
-                    aux += "\033[1;31m" + \
-                        str(pointer.data) + "\033[0;0m" + " <-> "
+                    aux += "\033[1;31m" + str(pointer.data) + "\033[0;0m" + " <-> "
                 else:
                     aux += f"{pointer.data} <-> "
                 pointer = pointer.next

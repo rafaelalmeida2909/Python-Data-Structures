@@ -154,7 +154,7 @@ class BinaryTree:
         else:
             left_height = self.height(node.left)
             right_height = self.height(node.right)
-            if (left_height > right_height):
+            if left_height > right_height:
                 return left_height + 1
             else:
                 return right_height + 1
@@ -172,9 +172,9 @@ class BinaryTree:
         if self._root is None:
             return True
         return False
-    
+
     def printTree(self, node=None):
-        """Prints the Avl Tree"""
+        """Prints the Tree"""
         if node is None:
             node = self._root
         lines, *_ = self._printTree(node)
@@ -182,9 +182,9 @@ class BinaryTree:
             print(line)
 
     def _printTree(self, node):
-        """Auxiliary function to print the Avl Tree"""
+        """Auxiliary function to print the Tree"""
         if node.right is None and node.left is None:  # No child
-            line = '%s' % node.data
+            line = "%s" % node.data
             width = len(line)
             height = 1
             middle = width // 2
@@ -192,35 +192,34 @@ class BinaryTree:
 
         if node.right is None:  # Only left child
             lines, n, p, x = self._printTree(node.left)
-            s = '%s' % node.data
+            s = "%s" % node.data
             u = len(s)
-            first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s
-            second_line = x * ' ' + '/' + (n - x - 1 + u) * ' '
-            shifted_lines = [line + u * ' ' for line in lines]
+            first_line = (x + 1) * " " + (n - x - 1) * "_" + s
+            second_line = x * " " + "/" + (n - x - 1 + u) * " "
+            shifted_lines = [line + u * " " for line in lines]
             return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
 
         if node.left is None:  # Only right child
             lines, n, p, x = self._printTree(node.right)
-            s = '%s' % node.data
+            s = "%s" % node.data
             u = len(s)
-            first_line = s + x * '_' + (n - x) * ' '
-            second_line = (u + x) * ' ' + '\\' + (n - x - 1) * ' '
-            shifted_lines = [u * ' ' + line for line in lines]
+            first_line = s + x * "_" + (n - x) * " "
+            second_line = (u + x) * " " + "\\" + (n - x - 1) * " "
+            shifted_lines = [u * " " + line for line in lines]
             return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
 
         left, n, p, x = self._printTree(node.left)  # Two children
         right, m, q, y = self._printTree(node.right)
-        s = '%s' % node.data
+        s = "%s" % node.data
         u = len(s)
-        first_line = (x + 1) * ' ' + (n - x - 1) * \
-            '_' + s + y * '_' + (m - y) * ' '
-        second_line = x * ' ' + '/' + \
-            (n - x - 1 + u + y) * ' ' + '\\' + (m - y - 1) * ' '
+        first_line = (x + 1) * " " + (n - x - 1) * "_" + s + y * "_" + (m - y) * " "
+        second_line = (
+            x * " " + "/" + (n - x - 1 + u + y) * " " + "\\" + (m - y - 1) * " "
+        )
         if p < q:
-            left += [n * ' '] * (q - p)
+            left += [n * " "] * (q - p)
         elif q < p:
-            right += [m * ' '] * (p - q)
+            right += [m * " "] * (p - q)
         zipped_lines = zip(left, right)
-        lines = [first_line, second_line] + \
-            [a + u * ' ' + b for a, b in zipped_lines]
+        lines = [first_line, second_line] + [a + u * " " + b for a, b in zipped_lines]
         return lines, n + m + u, max(p, q) + 2, n + u // 2

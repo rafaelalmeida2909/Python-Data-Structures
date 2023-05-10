@@ -65,7 +65,7 @@ class LinkedQueue:
         """Method for representing the linked queue (user)"""
         rep = "\033[1;31m" + "first" + "\033[0;0m" + " -> "
         pointer = self._front
-        while(pointer != None):
+        while pointer != None:
             rep += f"{pointer.data} -> "
             if pointer.next is None:
                 break

@@ -46,7 +46,7 @@ class HashTable:
         """Transforms a key in index (Division method)"""
         if (isinstance(key, str) and key.isalnum()) or isinstance(key, int):
             if isinstance(key, str):
-                key = Hash.stringProcess(key)
+                key = HashTable.stringProcess(key)
             index = (key & int("0x7FFFFFFF", 16)) % table_size
         else:
             raise Exception("Unsupported type")
@@ -54,8 +54,8 @@ class HashTable:
 
     def doubleHashing(self, index, key, count):
         """Apply a new hash function"""
-        new_index = self.hashing(key, self._max-1) + 1
-        return ((index + count*new_index) & int("0x7FFFFFFF", 16)) % self._max
+        new_index = self.hashing(key, self._max - 1) + 1
+        return ((index + count * new_index) & int("0x7FFFFFFF", 16)) % self._max
 
     def reset(self):
         """Restores the hash table to its starting point(Empty)"""
@@ -67,7 +67,10 @@ class HashTable:
         count = 0
         while True:
             new_index = self.doubleHashing(index, key, count)
-            if self._hash_table[new_index] is None or self._hash_table[new_index].key == key:
+            if (
+                self._hash_table[new_index] is None
+                or self._hash_table[new_index].key == key
+            ):
                 return new_index
             else:
                 index = new_index
@@ -90,8 +93,7 @@ class HashTable:
             raise Exception("Hash table is empty")
         index = self.hashing(key, self._max)
         if self._hash_table[index] is None:
-            raise Exception(
-                f"The index corresponding to the key: {key}, is empty")
+            raise Exception(f"The index corresponding to the key: {key}, is empty")
         else:
             if self._hash_table[index].key == key:
                 return self._hash_table[index].data
@@ -99,7 +101,8 @@ class HashTable:
                 new_index = self.processCollisions(index, key)
                 if self._hash_table[new_index] is None:
                     raise Exception(
-                        f"The index corresponding to the key: {key}, is empty")
+                        f"The index corresponding to the key: {key}, is empty"
+                    )
                 return self._hash_table[new_index].data
 
     def __len__(self):

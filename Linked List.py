@@ -37,7 +37,7 @@ class LinkedList:
         """Appends a new element in the end of list"""
         if self._first:  # if is not None
             pointer = self._first
-            while(pointer.next):
+            while pointer.next:
                 pointer = pointer.next
             pointer.next = Node(elem)
         else:
@@ -53,7 +53,7 @@ class LinkedList:
             self._first = self._first.next
             self._size -= 1
         else:
-            pointer = self.getItemByIndex(index-1)
+            pointer = self.getItemByIndex(index - 1)
             pointer.next = pointer.next.next
             self._size -= 1
 
@@ -75,7 +75,7 @@ class LinkedList:
             aux.next, self._first = pointer, aux
             self._size += 1
         elif index < self._size:
-            pointer = self.getItemByIndex(index-1)
+            pointer = self.getItemByIndex(index - 1)
             aux = Node(elem)
             aux.next, pointer.next = pointer.next, aux
             self._size += 1
@@ -92,7 +92,7 @@ class LinkedList:
             self._first = self._first.next
             self._size -= 1
             return elem
-        pointer = self.getItemByIndex(index-1)
+        pointer = self.getItemByIndex(index - 1)
         elem = pointer.next.data
         pointer.next = pointer.next.next
         self._size -= 1
@@ -107,7 +107,7 @@ class LinkedList:
         """Returns the number of elements with the specified value"""
         pointer = self._first
         cont = 0
-        while(pointer != None):
+        while pointer != None:
             if pointer.data == elem:
                 cont += 1
             pointer = pointer.next
@@ -117,7 +117,7 @@ class LinkedList:
         """Returns the index of specified element"""
         pointer = self._first
         cont = 0
-        while(pointer):
+        while pointer:
             if pointer.data == elem:
                 return cont
             else:
@@ -129,7 +129,7 @@ class LinkedList:
         """Reverses the original list"""
         if self._size == 0:
             raise IndexError("Empty list")
-        for i in range(self._size-1, -1, -1):
+        for i in range(self._size - 1, -1, -1):
             self.append(self.pop(i))
 
     def createReverse(self):
@@ -137,7 +137,7 @@ class LinkedList:
         if self._size == 0:
             raise IndexError("Empty list")
         new = LinkedList()
-        for i in range(self._size-1, -1, -1):
+        for i in range(self._size - 1, -1, -1):
             new.append(self[i])
         return new
 
@@ -164,7 +164,7 @@ class LinkedList:
             pointer = self.getItemByIndex(index)
             self._first = pointer.next
         else:
-            pointer = self.getItemByIndex(index-1)
+            pointer = self.getItemByIndex(index - 1)
             pointer.next = pointer.next.next
         self._size -= 1
 
@@ -175,7 +175,7 @@ class LinkedList:
         """Method to represent a linked list (user)"""
         rep = "\033[1;31m" + "head" + "\033[0;0m" + " -> "
         pointer = self._first
-        while(pointer != None):
+        while pointer != None:
             rep += f"{pointer.data} -> "
             if pointer.next is None:
                 break

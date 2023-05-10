@@ -37,8 +37,9 @@ class AvlTree:
         while True:
             if node is None:
                 break
-            node.height = max(self.heightNode(node.left),
-                              self.heightNode(node.right)) + 1
+            node.height = (
+                max(self.heightNode(node.left), self.heightNode(node.right)) + 1
+            )
             node = node.parent
 
     def balanceTree(self, node):
@@ -83,8 +84,9 @@ class AvlTree:
                 node2.left.parent = node1
             node2.left = current.left
             node1.parent = current.left
-            node1.height = max(self.heightNode(node1.left),
-                               self.heightNode(node1.right)) + 1
+            node1.height = (
+                max(self.heightNode(node1.left), self.heightNode(node1.right)) + 1
+            )
         node2.right = current.right
         if current.right != None:
             current.right.parent = node2
@@ -100,8 +102,7 @@ class AvlTree:
         """Right rotation function"""
         node = self.copy(root.left)
         root.left = node.right
-        root.height = max(self.heightNode(root.left),
-                          self.heightNode(root.right)) + 1
+        root.height = max(self.heightNode(root.left), self.heightNode(root.right)) + 1
         node.right = self.copy(root)
         node.height = max(self.heightNode(node.left), root.height) + 1
         root.data = node.data
@@ -119,8 +120,7 @@ class AvlTree:
         """Left rotation function"""
         node = self.copy(root.right)
         root.right = node.left
-        root.height = max(self.heightNode(root.left),
-                          self.heightNode(root.right)) + 1
+        root.height = max(self.heightNode(root.left), self.heightNode(root.right)) + 1
         node.left = self.copy(root)
         node.height = max(self.heightNode(node.right), root.height) + 1
         root.data = node.data
@@ -306,7 +306,7 @@ class AvlTree:
         else:
             left_height = self.height(node.left)
             right_height = self.height(node.right)
-            if (left_height > right_height):
+            if left_height > right_height:
                 return left_height + 1
             else:
                 return right_height + 1
@@ -336,7 +336,7 @@ class AvlTree:
     def _printTree(self, node):
         """Auxiliary function to print the Avl Tree"""
         if node.right is None and node.left is None:  # No child
-            line = '%s' % node.data
+            line = "%s" % node.data
             width = len(line)
             height = 1
             middle = width // 2
@@ -344,37 +344,36 @@ class AvlTree:
 
         if node.right is None:  # Only left child
             lines, n, p, x = self._printTree(node.left)
-            s = '%s' % node.data
+            s = "%s" % node.data
             u = len(s)
-            first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s
-            second_line = x * ' ' + '/' + (n - x - 1 + u) * ' '
-            shifted_lines = [line + u * ' ' for line in lines]
+            first_line = (x + 1) * " " + (n - x - 1) * "_" + s
+            second_line = x * " " + "/" + (n - x - 1 + u) * " "
+            shifted_lines = [line + u * " " for line in lines]
             return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
 
         if node.left is None:  # Only right child
             lines, n, p, x = self._printTree(node.right)
-            s = '%s' % node.data
+            s = "%s" % node.data
             u = len(s)
-            first_line = s + x * '_' + (n - x) * ' '
-            second_line = (u + x) * ' ' + '\\' + (n - x - 1) * ' '
-            shifted_lines = [u * ' ' + line for line in lines]
+            first_line = s + x * "_" + (n - x) * " "
+            second_line = (u + x) * " " + "\\" + (n - x - 1) * " "
+            shifted_lines = [u * " " + line for line in lines]
             return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
 
         left, n, p, x = self._printTree(node.left)  # Two children
         right, m, q, y = self._printTree(node.right)
-        s = '%s' % node.data
+        s = "%s" % node.data
         u = len(s)
-        first_line = (x + 1) * ' ' + (n - x - 1) * \
-            '_' + s + y * '_' + (m - y) * ' '
-        second_line = x * ' ' + '/' + \
-            (n - x - 1 + u + y) * ' ' + '\\' + (m - y - 1) * ' '
+        first_line = (x + 1) * " " + (n - x - 1) * "_" + s + y * "_" + (m - y) * " "
+        second_line = (
+            x * " " + "/" + (n - x - 1 + u + y) * " " + "\\" + (m - y - 1) * " "
+        )
         if p < q:
-            left += [n * ' '] * (q - p)
+            left += [n * " "] * (q - p)
         elif q < p:
-            right += [m * ' '] * (p - q)
+            right += [m * " "] * (p - q)
         zipped_lines = zip(left, right)
-        lines = [first_line, second_line] + \
-            [a + u * ' ' + b for a, b in zipped_lines]
+        lines = [first_line, second_line] + [a + u * " " + b for a, b in zipped_lines]
         return lines, n + m + u, max(p, q) + 2, n + u // 2
 
     def printHeights(self):
@@ -387,8 +386,7 @@ class AvlTree:
         """Auxiliary function to print the height of nodes"""
         if cur_node != None:
             self._printHeights(cur_node.left)
-            print(f'{cur_node.data},'.center(5) +
-                  f' {str(cur_node.height).center(6)}')
+            print(f"{cur_node.data},".center(5) + f" {str(cur_node.height).center(6)}")
             self._printHeights(cur_node.right)
 
     def printParents(self):
@@ -402,9 +400,10 @@ class AvlTree:
         if cur_node != None:
             self._printParents(cur_node.left)
             if cur_node.parent != None:
-                print(f'{cur_node.data},'.center(5) +
-                  f' {str(cur_node.parent.data).center(6)}')
+                print(
+                    f"{cur_node.data},".center(5)
+                    + f" {str(cur_node.parent.data).center(6)}"
+                )
             else:
-                print(f'{cur_node.data},'.center(5) +
-                  f' {str(None).center(6)}')
+                print(f"{cur_node.data},".center(5) + f" {str(None).center(6)}")
             self._printParents(cur_node.right)

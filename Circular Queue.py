@@ -53,7 +53,7 @@ class Queue:
         """Returns the last element from queue"""
         if self._size == 0:
             raise Exception("Empty queue")
-        return self._queue[self._back-1]
+        return self._queue[self._back - 1]
 
     def empty(self):
         """Verifys if the queue is empty"""

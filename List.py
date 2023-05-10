@@ -43,8 +43,8 @@ class List:
         index = self.index(elem)
         elem = None
         elem, self._list[index] = self._list[index], None
-        for i in range(index, self._size-1, +1):
-            self._list[i], self._list[i+1] = self._list[i+1], self._list[i]
+        for i in range(index, self._size - 1, +1):
+            self._list[i], self._list[i + 1] = self._list[i + 1], self._list[i]
         self._size -= 1
 
     def empty(self):
@@ -63,7 +63,7 @@ class List:
             index = self._size + index
         if index < self._size:
             for i in range(self._size, index, -1):
-                self._list[i], self._list[i-1] = self._list[i-1], self._list[i]
+                self._list[i], self._list[i - 1] = self._list[i - 1], self._list[i]
             self._list[index] = elem
             self._size += 1
         else:
@@ -75,8 +75,8 @@ class List:
             raise IndexError("Empty list")
         index = self.processIndex(index)
         elem, self._list[index] = self._list[index], None
-        for i in range(index, self._size-1, +1):
-            self._list[i], self._list[i+1] = self._list[i+1], self._list[i]
+        for i in range(index, self._size - 1, +1):
+            self._list[i], self._list[i + 1] = self._list[i + 1], self._list[i]
         self._size -= 1
         return elem
 
@@ -106,7 +106,7 @@ class List:
         if self._size == 0:
             raise IndexError("Empty list")
         final = self._size - 1
-        for i in range((self._size//2)):
+        for i in range((self._size // 2)):
             self._list[i], self._list[final] = self._list[final], self._list[i]
             final -= 1
 
@@ -115,7 +115,7 @@ class List:
         if self._size == 0:
             raise IndexError("Empty list")
         new = List(self._max)
-        for i in range(self._size-1, -1, -1):
+        for i in range(self._size - 1, -1, -1):
             new.append(self._list[i])
         return new
 
@@ -140,8 +140,8 @@ class List:
         if index >= self._size:
             raise IndexError("Index out of range")
         self._list[index] = None
-        for i in range(index, self._size-1, +1):
-            self._list[i], self._list[i+1] = self._list[i+1], self._list[i]
+        for i in range(index, self._size - 1, +1):
+            self._list[i], self._list[i + 1] = self._list[i + 1], self._list[i]
         self._size -= 1
 
     def __del__(self):
